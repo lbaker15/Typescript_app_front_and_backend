@@ -2,8 +2,12 @@ const path = require('path')
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+
+app.set('view engine', 'pug');
+app.set('views', 'views');
+
 //Router routes
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 const productRoutes = require('./routes/product');
 
 //Middleware - always run next()
@@ -12,11 +16,11 @@ const productRoutes = require('./routes/product');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'css')));
 //Imports from router
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(productRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    res.status(404).render('404', {pageTitle: 'Page Not Found'});
 });
 
 //This creates the server
