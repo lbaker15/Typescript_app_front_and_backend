@@ -22,24 +22,22 @@ const getProviders = async (req, res, next) => {
     }
     
     //CHECK OTHER CONDITIONS HERE - PROVIDERS GENDER, AGE, TREATMENT E
-    // Provider.find(
-    //     val
-    // , async (err, result) => {
-    //     console.log('RESULT', result)
-    //     if (result) {       
-    //         let promises = result.map(async (x) => {
-    //             let obj = {'lat': x.lat, 'lng': x.lng}
-    //             let data = await helpers.getDistance(obj, clientAddress)
-    //             let km = Number(data)/1000
-    //             if (km < distanceLimit) {
-    //                 return array.push(x)
-    //             } else { return }
-    //         })
-    //         Promise.all(promises).then(() => {
-    //             res.json({'Data': array})
-    //         })
-    //     }
-    // })
+    Places.find({}, async (err, result) => {
+        console.log('RESULT', result)
+        if (result) {       
+            let promises = result.map(async (x) => {
+                let obj = {'lat': x.lat, 'lng': x.lng}
+                let data = await helpers.getDistance(obj, clientAddress)
+                let km = Number(data)/1000
+                if (km < distanceLimit) {
+                    return array.push(x)
+                } else { return }
+            })
+            Promise.all(promises).then(() => {
+                res.json({'Data': array})
+            })
+        }
+    })
 }
 
 const addProvider = async (req, res, next) => {
@@ -63,7 +61,6 @@ const addProvider = async (req, res, next) => {
                 const {data} = await axios.post(`
                     https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}
                 `)
-                console.log('DATA', data)
                 providerCoords = await data.results[0].geometry.location; 
                 // setTimeout(async () => {
                         if (providerCoords.lat && providerCoords.lng) {
