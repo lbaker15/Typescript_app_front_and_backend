@@ -1,0 +1,17 @@
+.search {
+    font-family: Manrope;
+    width: 100vw;
+    height: 40px;
+    display: flex; justify-content: center;
+    padding-top: 50px;
+}
+.search button {
+    background: black; color: white;
+    font-family: Manrope; font-weight: 200;
+    padding: 0px 33px;
+    border: none; border-radius: 3px;
+}
+.search input {
+    border-radius: 3px; border: 1px solid #adadad;
+    min-width: 300px; outline: none;
+}
