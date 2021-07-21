@@ -14,9 +14,9 @@ const adminData = require('./routes/admin');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'css')));
 app.use('/admin', adminData.routes);
-app.use((req, res, next) => {
-    res.status(404).render('404', {pageTitle: 'Page Not Found'});
-});
+// app.use((req, res, next) => {
+//     res.status(404).render('404', {pageTitle: 'Page Not Found'});
+// });
 
 mongoose.connect(
     `mongodb+srv://lbaker15:4rtghlae@cluster0.8pqo6.mongodb.net/Places?retryWrites=true&w=majority
