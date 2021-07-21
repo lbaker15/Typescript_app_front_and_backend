@@ -5,19 +5,19 @@ const helpers = require('./functionHelpers');
 const getProviders = async (req, res, next) => {
     let {address, distanceLimit} = req.body;
     console.log('fired')
-    distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
-    address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
-    let addressEdit = await helpers.stringReplace(address)
-    let clientAddress; 
-    try {
-        const {data} = await axios.post(`
-            https://maps.googleapis.com/maps/api/geocode/json?address=${addressEdit}&key=${key}
-        `)
-        clientAddress = data.results[0].geometry.location;
-        console.log(clientAddress)
-    } catch(err) {
-        console.log(err)
-    }
+    // distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
+    // address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
+    // let addressEdit = await helpers.stringReplace(address)
+    // let clientAddress; 
+    // try {
+    //     const {data} = await axios.post(`
+    //         https://maps.googleapis.com/maps/api/geocode/json?address=${addressEdit}&key=${key}
+    //     `)
+    //     clientAddress = data.results[0].geometry.location;
+    //     console.log(clientAddress)
+    // } catch(err) {
+    //     console.log(err)
+    // }
     
     //CHECK OTHER CONDITIONS HERE - PROVIDERS GENDER, AGE, TREATMENT E
     // Provider.find(
