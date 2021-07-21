@@ -9,8 +9,6 @@ app.set('view engine', 'pug');
 app.set('views', 'views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
-//Router routes
 const adminData = require('./routes/admin');
 
 app.use(express.static(path.join(__dirname, 'css')));

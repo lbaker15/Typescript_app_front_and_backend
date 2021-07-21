@@ -63,6 +63,7 @@ const addProvider = async (req, res, next) => {
                 const {data} = await axios.post(`
                     https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}
                 `)
+                console.log('DATA', data)
                 providerCoords = await data.results[0].geometry.location; 
                 // setTimeout(async () => {
                         if (providerCoords.lat && providerCoords.lng) {
