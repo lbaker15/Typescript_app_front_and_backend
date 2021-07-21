@@ -3,10 +3,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 const port = process.env.PORT || 3000;
+
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 const adminData = require('./routes/admin');
