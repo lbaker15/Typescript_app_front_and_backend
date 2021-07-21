@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/places');
 
-router.get('/places', controller.getProviders);
+router.post('/places', controller.getProviders);
 
 exports.routes = router;
 
