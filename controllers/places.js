@@ -42,7 +42,7 @@ const getProviders = async (req, res, next) => {
     // })
 }
 
-const addProvider = (req, res, next) => {
+const addProvider = async (req, res, next) => {
     let { businessAddress, name, telephone } = req.body;
     if (businessAddress && name && telephone) {
             let obj = {
