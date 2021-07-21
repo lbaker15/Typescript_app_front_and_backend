@@ -22,9 +22,17 @@ class Form extends React.Component<MyProps> {
     handleSubmit = () => {
         const {username, password} = this.state;
         if (username.length > 1 && password.length > 1) {
-            this.setState({
-                redirect: true
-            })
+            let token = '1234'; let name = 'tokenName'; 
+            let now = new Date()
+            let time = now.getTime()
+            time += 1 * 3600 * 1000
+            now.setTime(time)
+            document.cookie = name + "=" + token + ";expires=" + now.toUTCString() +";path=/";
+            setTimeout(() => {
+                this.setState({
+                    redirect: true
+                })
+            }, 1000)
         }
     }
     render() {
