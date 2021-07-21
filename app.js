@@ -8,17 +8,10 @@ app.set('views', 'views');
 
 //Router routes
 const adminData = require('./routes/admin');
-const productRoutes = require('./routes/product');
 
-//Middleware - always run next()
-//Default response header is text/html for a string res
-//Need bodyParser to parse req.body
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'css')));
-//Imports from router
 app.use('/admin', adminData.routes);
-app.use(productRoutes);
-
 app.use((req, res, next) => {
     res.status(404).render('404', {pageTitle: 'Page Not Found'});
 });
