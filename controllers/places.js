@@ -13,6 +13,7 @@ const getProviders = async (req, res, next) => {
             https://maps.googleapis.com/maps/api/geocode/json?address=${addressEdit}&key=${key}
         `)
         clientAddress = data.results[0].geometry.location;
+        console.log(clientAddress)
     } catch(err) {
         console.log(err)
     }
