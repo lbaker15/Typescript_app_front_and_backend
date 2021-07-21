@@ -20,7 +20,7 @@ const getProviders = async (req, res, next) => {
     } catch(err) {
         console.log(err)
     }
-    
+    let array = new Array;
     //CHECK OTHER CONDITIONS HERE - PROVIDERS GENDER, AGE, TREATMENT E
     Places.find({}, async (err, result) => {
         console.log('RESULT', result)
