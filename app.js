@@ -7,11 +7,11 @@ const port = process.env.PORT || 3000;
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
+app.use(bodyParser.urlencoded({extended: false}));
 
 //Router routes
 const adminData = require('./routes/admin');
 
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'css')));
 app.use('/admin', adminData.routes);
 // app.use((req, res, next) => {
