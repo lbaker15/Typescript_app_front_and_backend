@@ -12,7 +12,7 @@ class Header extends React.Component<MyProps> {
                 <div className="header">
                     {tabs.map(x => {
                         return (
-                            <button>{x}</button>
+                            <button key={x}>{x}</button>
                         )
                     })}
                 </div>

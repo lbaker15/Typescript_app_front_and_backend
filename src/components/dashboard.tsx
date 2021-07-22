@@ -2,6 +2,8 @@ import React from "react";
 import Header from './header';
 import Loader from './loader';
 import Search from './search';
+import List from './list';
+import Wrapper from '../wrapper';
 
 type MyState = {
     validated: boolean;
@@ -40,13 +42,17 @@ class Dashboard extends React.Component<MyProps> {
     }
     render() {
         const {validated, address} = this.state;
-        console.log(address)
         if (validated) {
             return (
                 <React.Fragment>
                     <Header tabs={['Home', 'Option One', 'Log out']} />
-                    <Search handleSubmit={this.handleSubmit} 
-                    handleChange={this.handleChange} address={address} />
+                    <div className="padding">
+                        <Wrapper>
+                            <Search handleSubmit={this.handleSubmit} 
+                            handleChange={this.handleChange} address={address} />
+                            <List />
+                        </Wrapper>
+                    </div>
                 </React.Fragment>
             )
         } else {

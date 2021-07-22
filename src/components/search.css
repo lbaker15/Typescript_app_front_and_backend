@@ -1,6 +1,6 @@
 .search {
     font-family: Manrope;
-    width: 100vw;
+    width: 100%;
     height: 40px;
     display: flex; justify-content: center;
     padding-top: 50px;
@@ -8,10 +8,10 @@
 .search button {
     background: black; color: white;
     font-family: Manrope; font-weight: 200;
-    padding: 0px 33px;
+    width: 100px;
     border: none; border-radius: 3px;
 }
 .search input {
     border-radius: 3px; border: 1px solid #adadad;
-    min-width: 300px; outline: none;
+    width: clamp(50%, calc(100% - 100px), 100%); outline: none;
 }

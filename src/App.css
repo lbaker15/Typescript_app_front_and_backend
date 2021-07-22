@@ -38,3 +38,7 @@
     transform: rotate(360deg);
   }
 }
+
+.padding {
+  width: 80%; margin-left: 10%;
+}

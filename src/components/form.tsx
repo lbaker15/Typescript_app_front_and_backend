@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import './form.css';
 import TextField from './textFields';
 import Button from './button';
+import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import Wrapper from '../wrapper';
 
 type MyState = {
     username: string;
@@ -40,14 +42,18 @@ class Form extends React.Component<MyProps> {
         return (
             <React.Fragment>
                 {redirect && <Redirect to="/dashboard" />}
-                <div className="form">
-                    <TextField value={username} handleChange={this.handleChange} label='Username' name='username' />
-                    <TextField value={password} handleChange={this.handleChange} label='Password' name='password' />
-                    <Button handleClick={this.handleSubmit} stringg="Submit" />
-                </div>
+                <Wrapper>
+                    <div className="form">
+                        <TextField value={username} handleChange={this.handleChange} label='Username' name='username' />
+                        <TextField value={password} handleChange={this.handleChange} label='Password' name='password' />
+                        <Button handleClick={this.handleSubmit} stringg="Submit" />
+                    </div>
+                </Wrapper>
             </React.Fragment>
         )
     }
 }
 
-export default Form;
+export default connect((state) => ({
+
+}))(Form);
