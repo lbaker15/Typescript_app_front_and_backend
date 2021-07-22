@@ -1,6 +1,6 @@
-export type Action = {type: 'MAP_SAVED'; payload: string; }
+export type Action = {type: 'MAP_SAVED'; payload: object; }
 
-export const addMapRedux = (map: string): Action => ({
+export const addMapRedux = (map: object): Action => ({
     type: 'MAP_SAVED',
     payload: map
 })

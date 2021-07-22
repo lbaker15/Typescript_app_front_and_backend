@@ -3,7 +3,9 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { addMapRedux } from '../actions/map';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { MyState } from "../reducers";
+import { MyState, reducer } from "../reducers";
+import { RootState } from '../store';
+
 let key = 'AIzaSyCNxlh-79Og3dQ_tYpV_Vzlkx3kAPyZ6HI';
 const loader = new Loader({
   apiKey: key,
@@ -12,7 +14,6 @@ const loader = new Loader({
 
 type MyProps = {
     addMapRedux: Function;
-    map: object;
 }
 class Map extends React.Component<MyProps> {
     componentDidMount() {
@@ -27,7 +28,7 @@ class Map extends React.Component<MyProps> {
         });
     }
     render() {
-        console.log(this.props)
+        console.log(this.props, this.state)
         return (
             <React.Fragment>
                 <div className="mapContainer">
@@ -41,11 +42,11 @@ class Map extends React.Component<MyProps> {
     }
 }
 
-const mapStateToProps = ({map}: MyState) => ({
-    map: map
+const mapStateToProps = (state: RootState) => ({
+    map: state.reducer
 })
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    addMapRedux: (map: string) => dispatch(addMapRedux(map))
+    addMapRedux: (map: object) => dispatch(addMapRedux(map))
 })
   
 export default connect(

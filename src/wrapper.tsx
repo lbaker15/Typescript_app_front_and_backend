@@ -12,7 +12,7 @@ type Props = {
 type State = {}
 class Wrapper extends React.Component<Props, State> {
     componentDidMount() {
-        this.props.addMapRedux('map')
+        // this.props.addMapRedux('map')
     }
     render() {
         const {children} = this.props;
@@ -30,7 +30,7 @@ const mapStateToProps = ({map}: MyState) => ({
     map
 })
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    addMapRedux: (map: string) => dispatch(addMapRedux(map))
+    addMapRedux: (map: object) => dispatch(addMapRedux(map))
 })
   
 export default connect(

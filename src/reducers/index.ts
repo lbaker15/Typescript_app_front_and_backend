@@ -1,10 +1,10 @@
 import { Action } from "../actions/map"
 
 export interface MyState {
-    map: string[];
+    map: object;
 }
 const initialState = {
-    map: [],
+    map: {'here': 'here'},
 }
 
 export const reducer = (
@@ -13,8 +13,10 @@ export const reducer = (
   ) => {
   switch(action.type){
     case "MAP_SAVED": {
-      //console.log( action.payload )
-      return action.payload;
+      state.map = action.payload;
+      // console.log(state.map)
+      //let newA = Object.assign(state.map, action.payload)
+      return {map: action.payload};
     }
     default:
       return state
