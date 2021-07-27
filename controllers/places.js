@@ -41,13 +41,14 @@ const getProviders = async (req, res, next) => {
 }
 
 const addProvider = async (req, res, next) => {
-    let { businessAddress, name, telephone } = req.body;
+    let { businessAddress, name, telephone, category } = req.body;
     console.log(businessAddress)
-    if (businessAddress && name && telephone) {
+    if (businessAddress && name && telephone && category) {
             let obj = {
                 name: String(name).toLowerCase(),
                 businessAddress: String(businessAddress).toLowerCase(),
-                telephone: Number(telephone)
+                telephone: Number(telephone),
+                category: String(category).toLowerCase()
             }
             let address;
             try {
