@@ -1,7 +1,7 @@
 import React from 'react';
 
 let categories = [
-    'category 1',
+    'food',
     'category 2',
     'category 3'
 ]

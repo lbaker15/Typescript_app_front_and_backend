@@ -37,8 +37,8 @@ class Dashboard extends React.Component<MyProps> {
         })
     }
     handleSubmit = () => {
-        const {address} = this.state;
-        let obj = {address, distanceLimit: 100}
+        const {address, category} = this.state;
+        let obj = {address, distanceLimit: 100, category}
         fetch('https://places-find.herokuapp.com/admin/places', {
             method: 'POST',
             headers: {
