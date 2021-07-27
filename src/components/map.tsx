@@ -23,6 +23,7 @@ class Map extends React.Component<MyProps> {
                     center: { lat: 53.9555583, lng: -1.0308132 },
                     zoom: 14,
                 });
+                console.log('MAP', map)
                 this.props.addMapRedux(map)
             }, 200)
         });
