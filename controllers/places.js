@@ -31,7 +31,9 @@ const getProviders = async (req, res, next) => {
                 let km = Number(data)/1000
                 if (km < distanceLimit) {
                     if (category) {
-                        console.log(x)
+                        if (x.category === category) {
+                            return array.push(x)
+                        }
                     } else {
                         return array.push(x)
                     }
