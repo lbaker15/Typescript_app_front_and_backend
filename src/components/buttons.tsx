@@ -1,9 +1,9 @@
 import React from 'react';
 
 let categories = [
-    'food',
-    'category 2',
-    'category 3'
+    'Indian',
+    'Chinese',
+    'Italian'
 ]
 type MyProps = {
     handleCategorySelection: ( e: React.MouseEvent ) => void;
@@ -13,13 +13,16 @@ class Buttons extends React.Component<MyProps> {
         const {handleCategorySelection} = this.props;
         return (
             <React.Fragment>
+                <div style={{paddingTop: 15, paddingBottom: 25}}>
                 {categories.map((x, i) => {
                     return <button
+                    className="btn"
                     key={x + i}
                     value={x}
                     onClick={handleCategorySelection}
                     >{x}</button>
                 })}
+                </div>
             </React.Fragment>
         )
     }

@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import Form from './components/form';
 import Dashboard from './components/dashboard';
+import AddPlace from './components/addPlace';
 // import Wrapper from './wrapper';
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 
@@ -31,7 +32,11 @@ class App extends React.Component {
             <Route path="/dashboard">
                   <Dashboard />
             </Route>
-          
+
+            <Route path="/addplace">
+                  <AddPlace />
+            </Route>
+
         </Switch>
       </Router>
     )

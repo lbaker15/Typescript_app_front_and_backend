@@ -19,7 +19,6 @@ class Wrapper extends React.Component<Props, State> {
         return (
             <React.Fragment>
                 <div>
-                    Wrapper
                     {children}
                 </div>
             </React.Fragment>
