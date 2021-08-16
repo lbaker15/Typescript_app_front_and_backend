@@ -56,9 +56,9 @@ const addProvider = async (req, res, next) => {
                 telephone: Number(telephone),
                 category: String(category).toLowerCase()
             }
-            let address;
+            let address2;
             try {
-                address = await helpers.stringReplace(obj.businessAddress)
+                address2 = await helpers.stringReplace(obj.businessAddress)
             } catch(err) {
                 let error = new HttpError('Could not convert address to lowercase', 500)
                 return next(error);
@@ -66,7 +66,7 @@ const addProvider = async (req, res, next) => {
             let providerCoords;
             try {
                 const {data} = await axios.post(`
-                    https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}
+                    https://maps.googleapis.com/maps/api/geocode/json?address=${address2}&key=${key}
                 `)
                 providerCoords = await data.results[0].geometry.location; 
                 // setTimeout(async () => {
