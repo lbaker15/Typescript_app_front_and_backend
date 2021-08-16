@@ -48,7 +48,7 @@ const getProviders = async (req, res, next) => {
 
 const addProvider = async (req, res, next) => {
     let { businessAddress, name, telephone, category } = req.body;
-    console.log(businessAddress)
+    console.log(req.body)
     if (businessAddress && name && telephone && category) {
             let obj = {
                 name: String(name).toLowerCase(),
