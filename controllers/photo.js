@@ -81,11 +81,17 @@ const uploadInsta = async (myPhoto, message, user, pass) => {
     let client;
     try {
         client = new Instagram({ username, password, cookie });
-    } catch(err) { return new Error({'Error': err}) }
+        console.log('new instagram worked')
+    } catch(err) { 
+        console.log('fail new instagram')
+        return new Error({'Error': err}) }
     //Upload to instagram
     try {
         await client.login()
-    } catch(err) { return new Error({'Error': err}) }
+        console.log('logged in')
+    } catch(err) { 
+        console.log('fail logging in ')
+        return new Error({'Error': err}) }
     let media;
     try {
         console.log('MYPHOTO: ', myPhoto, 'MESSAGE: ', message, 'CLIENT:', client)
