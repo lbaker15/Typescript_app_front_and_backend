@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import './form.css';
-import TextField from './textFields';
-import Button from './button';
+import './css/form.css';
+import TextField from './shared/textFields';
+import Button from './shared/button';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import Wrapper from '../wrapper';
+import Blur from './styling/blur';
 
 type MyState = {
     username: string;
@@ -44,9 +45,14 @@ class Form extends React.Component<MyProps> {
                 {redirect && <Redirect to="/dashboard" />}
                 <Wrapper>
                     <div className="form">
-                        <TextField value={username} handleChange={this.handleChange} label='Username' name='username' />
-                        <TextField value={password} handleChange={this.handleChange} label='Password' name='password' />
-                        <Button handleClick={this.handleSubmit} stringg="Submit" />
+                        <div className="formInner">
+                            <h1>Please Login Here</h1>
+                            <TextField value={username} handleChange={this.handleChange} label='Username' name='username' />
+                            <TextField value={password} handleChange={this.handleChange} label='Password' name='password' />
+                            <Button handleClick={this.handleSubmit} stringg="Submit" />
+                        </div>
+                        <Blur opacity={0.6} blur={80} left={-100} bottom={-50} right={1} top={1} />
+                        <Blur opacity={0.6} blur={80} left={1} right={-50} top={-50} bottom={1} />
                     </div>
                 </Wrapper>
             </React.Fragment>

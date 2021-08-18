@@ -1,5 +1,4 @@
 import React, { FocusEvent } from "react";
-import './form.css';
 
 
 type MyProps = {
@@ -18,7 +17,6 @@ class TextField extends React.Component<MyProps> {
         invalid: false
     }
     handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-        //console.log(e.target.validity.valid)
         const {valid} = e.target.validity;
         this.setState({
             clicked: true,

@@ -1,0 +1,60 @@
+.center {
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+}
+.btn {
+    padding: 7px 22px;
+    border-radius: 3px;
+    margin-left: 10px;
+    background: rgb(0, 0, 0);
+    color: white;
+    font-family: Manrope;
+    border: none;
+}
+#root {
+    background: linear-gradient(325deg, rgb(112, 255, 212) 0%, rgb(149, 177, 255) 100%);
+}
+.padding {
+    background: rgba(255, 255, 255, 0.37);
+    backdrop-filter: blur(20px);
+}
+.padding h2 {
+    font-family: Manrope;
+    margin-top: -20px;
+}
+.alertBit {
+    width: 360px; height: 150px;
+    position: absolute; background: rgba(255, 255, 255, 0.6);
+    font-family: Manrope; padding: 20px;
+    text-align: center; display: flex; 
+    justify-content: center; align-items: center;
+    font-weight: 200; flex-direction: column;
+}
+.alertClose {
+    background: black; color: white;
+    font-family: Manrope; 
+    font-weight: 200;
+    font-size: 16px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex; justify-content: center; align-items: center;
+    top: 5px; right: 5px; border: none; box-shadow: none;
+}
+
+
+.uploadBtn {
+  background-color: indigo;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+#file-chosen{
+  margin-left: 0.3rem;
+  font-family: sans-serif;
+}

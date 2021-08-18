@@ -1,39 +1,28 @@
 import './App.css';
 import React from 'react';
-import Form from './components/form';
+import Form from './components/loginForm';
 import Dashboard from './components/dashboard';
 import AddPlace from './components/addPlace';
-// import Wrapper from './wrapper';
+import Header from './components/header';
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 
-// const stateM = useSelector<MyState, MyState["map"]>(
-//   (state) => state.map
-// );
-// const dispatch = useDispatch();
-// const onAddMapRedux = (map: string) => {
-//   dispatch(addMapRedux(map));
-// };
-
 class App extends React.Component {
-  // renderList(): JSX.Element[] {
-  //   return (
-  //     <Form />
-  //   )
-  // }
   render() {
     return (
       <Router basename="/">
         <Switch>
           
-            <Route path="/home" children={() => (
+            <Route path="/login" children={() => (
                   <Form />
             )} />
             
             <Route path="/dashboard">
+                  <Header tabs={['Home', 'Add Place', 'Log out']} />
                   <Dashboard />
             </Route>
 
             <Route path="/addplace">
+                  <Header tabs={['Home', 'Add Place', 'Log out']} />
                   <AddPlace />
             </Route>
 

@@ -5,6 +5,9 @@
     display: flex; justify-content: center;
     padding-top: 50px;
 }
+.search input:focus {
+    background: rgb(241, 241, 241);
+}
 .search button {
     background: black; color: white;
     font-family: Manrope; font-weight: 200;

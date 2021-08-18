@@ -1,5 +1,5 @@
 import React from "react";
-import './search.css';
+import './css/search.css';
 
 
 type MyProps = {

@@ -1,0 +1,77 @@
+.form {
+    width: 100%;
+    height: 100vh;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    z-index: -2;
+    background: linear-gradient(325deg, rgb(112, 255, 212) 0%, rgb(149, 177, 255) 100%);
+}
+.formInner {
+    justify-content: center;
+    align-items: center;
+    display: flex; flex-direction: column;
+    text-align: center;
+    width: 500px; height: 450px;
+    background: white;
+    z-index: 100;
+}
+.formInner h1 {
+    margin-top: -20px;
+    padding-bottom: 20px;
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 32px;
+}
+.blurCircle {
+    position: 'absolute';
+    width: 400; height: 400;
+    border-radius: '50%'; 
+    background: 'white';
+}
+.row {
+    display: flex; flex-direction: column;
+    max-width: 500px; width: 350px;
+    height: 95px;
+}
+.row input {
+    border: 1px solid #c3c3c3;
+    height: 30px;
+    border-radius: 8px;
+    outline: none;
+    padding: 3px;
+    background:rgba(236, 236, 236, 0.5);
+}
+.row label {
+    color: rgb(59, 59, 59);
+    font-family: Manrope;
+    margin-bottom: 10px;
+}
+.submit {
+    background: black;
+    color: white;
+    font-family: Manrope;
+    padding: 12px 0px;
+    width: 350px;
+    border: none;
+    box-shadow: 1px 1px 6px #c3c3c3;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.alert {
+    font-family: manrope;
+    color: red; font-size: 10px;
+    margin-top: 5px;
+    display: none;
+}
+.alertInvalid {
+    font-family: manrope;
+    color: red; font-size: 10px;
+    margin-top: 5px;
+    display: none;
+}
+.col {
+    display: flex; flex-direction: column;
+    font-family: Manrope;
+    gap: 10px;
+}

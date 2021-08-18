@@ -1,0 +1,40 @@
+.list {
+    margin-top: 50px;
+    font-family: Manrope;
+    display: flex; justify-content: center;
+    padding-bottom: 100px;
+}
+.distance{
+    height: 80px;
+    background: transparent;
+}
+.distance h5 {
+    font-family: Manrope;
+    margin-bottom: 0;
+    text-align: center; 
+    margin-top: 5px;
+}
+.distance h3 {
+    font-family: Manrope;
+    margin-bottom: 0;
+    text-align: center;
+}
+.distance input {
+    margin-top: 15px;
+    margin-left: 0px;
+    width: 300px;
+    background: transparent;
+}
+.distance input[type=range] {
+    -webkit-appearance: none;
+}
+.distance input[type=range]::-webkit-slider-runnable-track {
+    height: 10px; background: #f7f7f7; border-radius: 25px;
+}
+.distance input[type=range]::-webkit-slider-thumb {
+    height: 20px; width: 20px; background: rgb(129, 131, 255);
+    -webkit-appearance: none;
+    border-radius: 50%;
+    margin-top: -5px;
+    box-shadow: 1px 1px 6px #9c9c9c;
+}

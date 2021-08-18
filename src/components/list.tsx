@@ -1,5 +1,5 @@
 import React from 'react';
-import './list.css'
+import './css/list.css'
 import Map from './map';
 
 class List extends React.Component {

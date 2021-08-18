@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import './header.css';
+import './css/header.css';
 
 type MyProps = {
     tabs: [string, string, string];
@@ -19,12 +19,18 @@ class Header extends React.Component<MyProps> {
             this.setState({
                 redirect: true, redirectTo: str
             })
+        } else {
+            let str = (theStr === 'home') ? 'dashboard' : theStr;
+            this.setState({
+                redirect: true, redirectTo: str
+            })
         }
         
     }
     render() {
         const {tabs} = this.props;
         const {redirect, redirectTo} = this.state;
+        console.log(redirectTo)
         return (
             <React.Fragment>
                 {redirect && (

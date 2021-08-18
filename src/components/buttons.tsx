@@ -13,7 +13,7 @@ class Buttons extends React.Component<MyProps> {
         const {handleCategorySelection} = this.props;
         return (
             <React.Fragment>
-                <div style={{paddingTop: 15, paddingBottom: 25}}>
+                <div style={{paddingTop: 15}}>
                 {categories.map((x, i) => {
                     return <button
                     className="btn"
