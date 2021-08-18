@@ -8,7 +8,7 @@ const bucket = require('../middleware/upload');
 
 router.post('/places', controller.getProviders);
 router.post('/add-place', controller.addProvider);
-router.post('/insta-upload', bucket, controller2.uploadPhoto);
+router.post('/insta-upload', bucket.fileUpload, controller2.uploadPhoto);
 
 exports.routes = router;
 
