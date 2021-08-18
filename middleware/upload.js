@@ -14,7 +14,6 @@ const storage = multer({
         acl: "public-read",
         bucket: 'multertest123',
         key: function (req, file, cb) {
-          console.log("HERE", req, file)
           cb(null, file.originalname)
         },
         metadata: (req, file, cb) => {
