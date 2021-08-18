@@ -68,11 +68,7 @@ const uploadPhoto = (req, res, next) => {
                 } else {
                     throw new Error({'Error': data.message})
                 }
-            })
-
-            // })
-            // .catch(err => console.log('Error: ', err))
-            
+            })            
         })
 }
 
