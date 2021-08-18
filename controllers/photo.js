@@ -94,10 +94,10 @@ const uploadInsta = async (myPhoto, message, user, pass) => {
         return new Error({'Error': err}) }
     let media;
     try {
-        console.log('MYPHOTO: ', myPhoto, 'MESSAGE: ', message, 'CLIENT:', client)
+        //console.log('MYPHOTO: ', myPhoto, 'MESSAGE: ', message, 'CLIENT:', client)
         await client.uploadPhoto({ photo: myPhoto, caption: message, post: 'feed' })
         .then(response => {
-            console.log('RESPONSE:', response)
+            //console.log('RESPONSE:', response)
             return media = response.media;
         })
     } catch(err) {
