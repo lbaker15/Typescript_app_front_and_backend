@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 var FormData = require('form-data');
 const FileCookieStore = require('tough-cookie-filestore2');
 const Instagram = require('instagram-web-api');
-// const cookieStore = new FileCookieStore('./cookies.json');
-// const cookie = cookieStore.idx['www.instagram.com']['/'].ig_cb;
+const cookieStore = new FileCookieStore('./cookies.json');
+//const cookie = cookieStore.idx['www.instagram.com']['/'].ig_cb;
 const MIME = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpeg'
@@ -43,21 +43,14 @@ const uploadPhoto = (req, res, next) => {
                     throw new Error('Could not upload to imgur')
                 }
             })
-            // .then(async (resolve) => {
-            //     let photo = resolve.data.link;
-            //     console.log('IMGUR PHOTO HAS UPLOADED, LINK:', photo)
-            //     let data = await uploadInsta(photo, message, username, password);
-                
+            .then(async (resolve) => {
+                let photo = resolve.data.link;
+                console.log('IMGUR PHOTO HAS UPLOADED, LINK:', photo)
+                let username = 'mg_456_789'; let password = '4rtghlae'; let message = 'test';
+                console.log(cookieStore, cookieStore.idx['www.instagram.com'])
+                //let data = await uploadInsta(photo, message, username, password);
+            })
             //     if(data.name !== 'Error') {
-            //         //SET UPLOADED ON PHOTO MODEL TO MEDIA CODE
-            //         await Photo.findOneAndUpdate({_id: photoId}, {uploaded: String(data)}, (err, result) => {
-            //             if (err) {
-            //                 return new Error({'Error': err})
-            //             } else {
-            //                 return;
-            //             }
-            //         })
-
             //         let deleteHash = resolve.data.deletehash;
             //         fetch(`https://api.imgur.com/3/image/${deleteHash}`, {
             //             method: 'POST',
