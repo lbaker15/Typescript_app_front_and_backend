@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 var FormData = require('form-data');
 const FileCookieStore = require('tough-cookie-filestore2');
 const Instagram = require('instagram-web-api');
-const cookieStore = new FileCookieStore('./cookies.json');
-const cookie = cookieStore.idx['www.instagram.com']['/'].ig_cb;
+// const cookieStore = new FileCookieStore('./cookies.json');
+// const cookie = cookieStore.idx['www.instagram.com']['/'].ig_cb;
 const MIME = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpeg'
