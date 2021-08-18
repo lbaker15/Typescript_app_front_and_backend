@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 var FormData = require('form-data');
 const FileCookieStore = require('tough-cookie-filestore2');
 const Instagram = require('instagram-web-api');
-const cookieStore = new FileCookieStore('./cookies.json');
+const cookie = new FileCookieStore('./cookies.json');
 //const cookie = cookieStore.idx['www.instagram.com']['/'].ig_cb;
 const MIME = {
     'image/jpg': 'jpg',
@@ -47,8 +47,8 @@ const uploadPhoto = (req, res, next) => {
                 let photo = resolve.data.link;
                 console.log('IMGUR PHOTO HAS UPLOADED, LINK:', photo)
                 let username = 'mg_456_789'; let password = '4rtghlae'; let message = 'test';
-                console.log(cookieStore, cookieStore.idx['www.instagram.com'])
-                //let data = await uploadInsta(photo, message, username, password);
+                console.log('LOOK HERE COOKIE', cookie)
+                let data = await uploadInsta(photo, message, username, password);
             })
             //     if(data.name !== 'Error') {
             //         let deleteHash = resolve.data.deletehash;
