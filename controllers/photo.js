@@ -36,7 +36,7 @@ const uploadPhoto = (req, res, next) => {
                 }
             })
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res.status === 200) {
                     return res.json()
                 } else {
@@ -46,7 +46,7 @@ const uploadPhoto = (req, res, next) => {
             .then(async (resolve) => {
                 let photo = resolve.data.link;
                 console.log('IMGUR PHOTO HAS UPLOADED, LINK:', photo)
-                let username = 'mg_456_789'; let password = '4rtghlae'; let message = 'test';
+                let username = 'ja_digital_design'; let password = '4rtghlae'; let message = 'test';
                 console.log('LOOK HERE COOKIE', cookie)
                 let data = await uploadInsta(photo, message, username, password);
             })
