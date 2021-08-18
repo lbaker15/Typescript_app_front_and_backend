@@ -1,8 +1,6 @@
 const aws = require('aws-sdk');
-const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 var FormData = require('form-data');
-const jwt = require('jsonwebtoken');
 const FileCookieStore = require('tough-cookie-filestore2');
 const Instagram = require('instagram-web-api');
 const cookieStore = new FileCookieStore('./cookies.json');
