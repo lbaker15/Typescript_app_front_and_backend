@@ -45,30 +45,31 @@ const uploadPhoto = (req, res, next) => {
             })
             .then(async (resolve) => {
                 let photo = resolve.data.link;
-                console.log('IMGUR PHOTO HAS UPLOADED, LINK:', photo, resolve)
+                let deleteHash = resolve.data.deleteHash;
+                console.log('IMGUR PHOTO HAS UPLOADED')
                 let username = 'ja_digital_design'; let password = '4rtghlae'; let message = 'test';
                 let data = await uploadInsta(photo, message, username, password);
-                console.log('return me', data)
+                if(data.name !== 'Error') {
+                    let deleteHash = resolve.data.deletehash;
+                    fetch(`https://api.imgur.com/3/image/${deleteHash}`, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: 'Client-ID 8f1d643d8417402'
+                        }
+                    })
+                    .then(res => {
+                        if (res.status === 200) {
+                            console.log('imgur image deleted')
+                        } else {
+                            return new Error({'Error': res})
+                        }
+                    })
+                    .catch(err => {throw new Error(err)})
+                } else {
+                    throw new Error({'Error': data.message})
+                }
             })
-            //     if(data.name !== 'Error') {
-            //         let deleteHash = resolve.data.deletehash;
-            //         fetch(`https://api.imgur.com/3/image/${deleteHash}`, {
-            //             method: 'POST',
-            //             headers: {
-            //                 Authorization: 'Client-ID 8f1d643d8417402'
-            //             }
-            //         })
-            //         .then(res => {
-            //             if (res.status === 200) {
-            //                 console.log('imgur image deleted')
-            //             } else {
-            //                 return new Error({'Error': res})
-            //             }
-            //         })
-            //         .catch(err => {throw new Error(err)})
-            //     } else {
-            //         throw new Error({'Error': data.message})
-            //     }
+
             // })
             // .catch(err => console.log('Error: ', err))
             
