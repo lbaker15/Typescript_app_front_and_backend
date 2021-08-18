@@ -47,8 +47,8 @@ const uploadPhoto = (req, res, next) => {
                 let photo = resolve.data.link;
                 console.log('IMGUR PHOTO HAS UPLOADED, LINK:', photo)
                 let username = 'ja_digital_design'; let password = '4rtghlae'; let message = 'test';
-                console.log('LOOK HERE COOKIE', cookie)
                 let data = await uploadInsta(photo, message, username, password);
+                console.log('return me', data)
             })
             //     if(data.name !== 'Error') {
             //         let deleteHash = resolve.data.deletehash;
