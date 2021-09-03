@@ -71,9 +71,16 @@ const uploadPhoto = (req, response, next) => {
                 } else {
                     throw new Error({'Error': data.message})
                 }
-            })            
+            })       
+            .catch(err => {
+                console.log('catch block 1')
+                new Error(err)
+            })     
         })
-        .catch(err => new Error(err))
+        .catch(err => {
+            console.log('catch block 2')
+            new Error(err)
+        })
 }
 
 const uploadInsta = async (myPhoto, message, user, pass) => {
