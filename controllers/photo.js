@@ -17,7 +17,7 @@ const s3 = new aws.S3({
 })
 
 
-const uploadPhoto = (req, res, next) => {
+const uploadPhoto = (req, response, next) => {
         let name = req.file.originalname;
         const {username, password} = req.body;
         console.log(username, password)
@@ -49,7 +49,7 @@ const uploadPhoto = (req, res, next) => {
                 let photo = resolve.data.link;
                 let deleteHash = resolve.data.deleteHash;
                 console.log('IMGUR PHOTO HAS UPLOADED')
-                let username = 'ja_digital_design'; let password = '4rtghlae'; let message = 'test';
+                let message = 'test';
                 let data = await uploadInsta(photo, message, username, password);
                 if(data.name !== 'Error') {
                     let deleteHash = resolve.data.deletehash;
@@ -62,6 +62,7 @@ const uploadPhoto = (req, res, next) => {
                     .then(res => {
                         if (res.status === 200) {
                             console.log('imgur image deleted')
+                            response.json({'Success': 'uploaded'})
                         } else {
                             return new Error({'Error': res})
                         }
