@@ -49,8 +49,8 @@ const uploadPhoto = (req, response, next) => {
             .then(async (resolve) => {
                 let photo = resolve.data.link;
                 let deleteHash = resolve.data.deleteHash;
-                console.log('IMGUR PHOTO HAS UPLOADED')
-                let data = await uploadInsta(photo, message, username, password);
+                console.log('IMGUR PHOTO HAS UPLOADED', username, password)
+                let data = await uploadInsta(photo, message, String(username), String(password));
                 if(data.name !== 'Error') {
                     let deleteHash = resolve.data.deletehash;
                     fetch(`https://api.imgur.com/3/image/${deleteHash}`, {
