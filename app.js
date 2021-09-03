@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
+const HttpError = require('./models/http-error');
 
 
 app.set('view engine', 'pug');
@@ -19,6 +20,11 @@ app.use('/admin', adminData.routes);
 // app.use((req, res, next) => {
 //     res.status(404).render('404', {pageTitle: 'Page Not Found'});
 // });
+app.use((error, req, res, next) => {
+    console.log(error.message)
+    res.status(error.code || 500);
+    res.json({ message: error.message || 'An unknown error occurred!' });
+});
 
 mongoose.connect(
     `mongodb+srv://lbaker15:4rtghlae@cluster0.8pqo6.mongodb.net/Places?retryWrites=true&w=majority
