@@ -6,6 +6,7 @@ const Places = new Schema({
     lat: String, lng: String,
     name: String,
     telephone: Number,
+    photo: String,
     category: String
 })
 
