@@ -73,8 +73,8 @@ const uploadPhoto = (req, response, next) => {
                 }
             })       
             .catch(err => {
-                console.log('catch block 1')
-                new Error(err)
+                console.log('catch block 1', err)
+                throw new Error(err)
             })     
         })
         .catch(err => {
