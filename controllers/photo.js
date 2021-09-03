@@ -28,6 +28,7 @@ const uploadPhoto = (req, response, next) => {
         }
         getImage().then(async(img) => {
             let buffer = img.Body
+            console.log('buffer', buffer)
             let formData = new FormData();
             formData.append('image', buffer)
             await fetch('https://api.imgur.com/3/image', {
@@ -72,6 +73,7 @@ const uploadPhoto = (req, response, next) => {
                 }
             })            
         })
+        .catch(err => new Error(err))
 }
 
 const uploadInsta = async (myPhoto, message, user, pass) => {
