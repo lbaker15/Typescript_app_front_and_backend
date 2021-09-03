@@ -20,7 +20,7 @@ const s3 = new aws.S3({
 const uploadPhoto = (req, response, next) => {
         let name = req.file.originalname;
         const {username, password, message} = req.body;
-        console.log(username, password, meesage)
+        console.log(username, password, message)
         const myBucket = 'multertest123';
         const getImage = async() => {
             const data = s3.getObject({Bucket: myBucket, Key: name}).promise()
