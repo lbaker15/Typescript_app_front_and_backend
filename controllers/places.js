@@ -54,7 +54,7 @@ const addProvider = async (req, res, next) => {
                 name: String(name).toLowerCase(),
                 businessAddress: String(address).toLowerCase(),
                 telephone: Number(telephone),
-                category: String(category).toLowerCase()
+                category: String(category).toLowerCase(),
                 photo: req.file.location
             }
             let address2;
