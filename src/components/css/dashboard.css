@@ -21,13 +21,14 @@
 }
 .padding h2 {
     font-family: Manrope;
-    margin-top: -20px;
+
 }
 .alertBit {
-    width: 360px; height: 150px;
-    position: absolute; background: rgba(255, 255, 255, 0.6);
+    width: 360px; height: auto;
+    position: absolute; background: rgba(241, 241, 241, 0.7);
     font-family: Manrope; padding: 20px;
     text-align: center; display: flex; 
+    backdrop-filter: blur(10px);
     justify-content: center; align-items: center;
     font-weight: 200; flex-direction: column;
 }
@@ -47,7 +48,8 @@
 .uploadBtn {
   background-color: indigo;
   color: white;
-  padding: 0.5rem;
+  padding: 0.7rem;
+  border: none;
   font-family: sans-serif;
   border-radius: 0.3rem;
   cursor: pointer;
@@ -57,4 +59,27 @@
 #file-chosen{
   margin-left: 0.3rem;
   font-family: sans-serif;
+}
+
+.instagramDetails {
+    display: flex; flex-direction: column;
+    gap: 10px;
+}
+.instagramDetails  input {
+    background: rgba(255, 255, 255, 0.84); border: 1px solid white;
+    padding: 5px; border-radius: 5px; outline:none;
+}
+.instaSubmit {
+    background: black; color: white;
+    border:  none; padding: 10px; border-radius: 6px;
+    font-family: Manrope; font-size: 16px;
+    font-weight: 300;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+.instagramShare {
+    background: none; border: none;
+    margin-bottom: 25px;
+    font-family: Manrope;
+    font-size: 18px; font-weight: 300;
 }

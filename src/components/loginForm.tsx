@@ -49,7 +49,9 @@ class Form extends React.Component<MyProps> {
                             <h1>Please Login Here</h1>
                             <TextField value={username} handleChange={this.handleChange} label='Username' name='username' />
                             <TextField value={password} handleChange={this.handleChange} label='Password' name='password' />
-                            <Button handleClick={this.handleSubmit} stringg="Submit" />
+                            <Button 
+                            specifiedClass="null"
+                            handleClick={this.handleSubmit} stringg="Submit" />
                         </div>
                         <Blur opacity={0.6} blur={80} left={-100} bottom={-50} right={1} top={1} />
                         <Blur opacity={0.6} blur={80} left={1} right={-50} top={-50} bottom={1} />

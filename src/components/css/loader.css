@@ -4,11 +4,14 @@
   justify-content: center;
   align-items: center;
   height: 90vh;
+  width: 100%;
+  position: fixed; top: 0; left: 0;
+  z-index: 10000;
 }
 .obj {
   width: 6px;
   height: 40px;
-  background-color: rgb(98, 0, 255);
+  background:linear-gradient(0deg, rgb(116, 255, 213) 0%, rgb(154, 143, 255) 100%);
   margin: 0 3px;
   border-radius: 10px;
   animation: loading 0.8s linear infinite;

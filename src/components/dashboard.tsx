@@ -90,7 +90,7 @@ class Dashboard extends React.Component<MyProps> {
         if (validated) {
             return (
                 <React.Fragment>
-                    <div className="padding">
+                    <div style={{height: 'auto', marginTop: 75}} className="padding">
                         <Wrapper>
                             <Search 
                             handleSubmit={this.handleSubmit} 
@@ -110,7 +110,7 @@ class Dashboard extends React.Component<MyProps> {
                 </React.Fragment>
             )
         } else {
-            return <Loader />
+            return <Loader background={false} />
         }
     }
 }

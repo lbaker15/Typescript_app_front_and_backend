@@ -5,17 +5,19 @@ import Dropdown from "./shared/dropdown";
 import Button from "./shared/button";
 import {addPlace} from './fetchHelpers/functions';
 import Alert from './alert';
+import Upload from './upload';
 
 type MyState = {
     name: string; telephone: string; 
     address: string; category: string;
-    alert: string;
+    alert: string; photo: any;
 }
 class AddPlace extends React.Component {
     state: MyState =  {
-        name: '', telephone: '', address: '', category: '', alert: ''
+        photo: '', name: '', telephone: '', address: '', category: '', alert: ''
     }
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e)
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -25,11 +27,25 @@ class AddPlace extends React.Component {
             [e.target.name]: e.target.value
         })
     }
+    handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            this.setState({
+                photo: e.target.files[0]
+            })
+        }
+    }
     handleClick = () => {
-        const {name, telephone, address, category} = this.state;
-        if (name.length > 0 && telephone.length > 0 && address.length > 0 && category.length > 0) {
-            let obj = {name, telephone: Number(telephone), address, category}
-            addPlace(obj).then(data => {
+        const {name, telephone, address, category, photo} = this.state;
+        let file = photo;
+        let iName = file.name;
+        const formData = new FormData();
+        formData.append('image', file, iName)
+        formData.append('name', name); formData.append('telephone', telephone);
+        formData.append('address', address); formData.append('category', category);
+       
+        if (name.length > 0 && photo && telephone.length > 0 && address.length > 0 && category.length > 0) {
+            //let obj = {name, telephone: Number(telephone), address, category}
+            addPlace(formData).then(data => {
                 if (data.Data) {
                     this.setState({
                         alert: 'Place added.'
@@ -49,10 +65,11 @@ class AddPlace extends React.Component {
     }
     render() {
         console.log(this.state)
-        const {name, telephone, address, category, alert} = this.state;
+        const {name, telephone, address, category, photo, alert} = this.state;
+        console.log('cherker', alert.length > 0)
         return (
-            <div style={{height: '90vh'}} className="padding">
-                <div style={{display: 'flex', flexDirection: 'column', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}} className="addPlace">
+            <div style={{height: '100vh'}} className="padding">
+                <div style={{display: 'flex', background: 'rgba(255, 255, 255, 0.05)', flexDirection: 'column', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}} className="addPlace">
                     <h2>Add Your Own Place</h2>
                     <TextField 
                     label={'name'} 
@@ -72,14 +89,22 @@ class AddPlace extends React.Component {
                     value={address}
                     handleChange={this.handleChange}
                     />
+                    <Upload 
+                    object={{marginBottom: 18, marginTop: -10}}
+                    handleChange={this.handlePhotoChange}
+                    value={photo} />
                     <Dropdown 
                     name={'category'} 
                     value={category}
                     handleChange={this.handleChangeSelect}
                     />
                     <br />
-                    <Button stringg={'Submit'} handleClick={this.handleClick} />
-                    <Alert alert={alert} closeAlert={this.closeAlert} />
+                    <Button 
+                    specifiedClass="null"
+                    stringg={'Submit'} handleClick={this.handleClick} />
+                    {(alert.length > 0) ? (                  
+                        <Alert alert={alert} closeAlert={this.closeAlert} />
+                    ): null}
                 </div>
             </div>
         )

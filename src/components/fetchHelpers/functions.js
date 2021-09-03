@@ -17,10 +17,7 @@ export const addPlace = (obj) => {
     return new Promise((resolve, rej) => {
         fetch('https://places-find.herokuapp.com/admin/add-place', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
+            body: obj
         })
         .then(res => resolve(res.json()) )
         .catch(err => rej(err))
