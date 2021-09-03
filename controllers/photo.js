@@ -19,8 +19,8 @@ const s3 = new aws.S3({
 
 const uploadPhoto = (req, response, next) => {
         let name = req.file.originalname;
-        const {username, password} = req.body;
-        console.log(username, password)
+        const {username, password, message} = req.body;
+        console.log(username, password, meesage)
         const myBucket = 'multertest123';
         const getImage = async() => {
             const data = s3.getObject({Bucket: myBucket, Key: name}).promise()
@@ -49,7 +49,6 @@ const uploadPhoto = (req, response, next) => {
                 let photo = resolve.data.link;
                 let deleteHash = resolve.data.deleteHash;
                 console.log('IMGUR PHOTO HAS UPLOADED')
-                let message = 'test';
                 let data = await uploadInsta(photo, message, username, password);
                 if(data.name !== 'Error') {
                     let deleteHash = resolve.data.deletehash;
