@@ -6,7 +6,8 @@ const ScheduledPhotos = new Schema({
     username: String,
     password: String,
     message: String,
-    uploaded: Boolean
+    uploaded: Boolean,
+    time: Number
 })
 
 module.exports = mongoose.model('ScheduledPhotos', ScheduledPhotos)
