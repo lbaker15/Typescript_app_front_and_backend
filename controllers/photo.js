@@ -23,7 +23,7 @@ const uploadPhoto = (req, response, next) => {
         const {location} = req.file;
         let now = new Date().getTime();
         console.log(now, time)
-        let future = Number(now) + (Number(time)*1000);
+        let future = Number(now) + (Number(time)*60000);
         let obj =  {"location": location, message, uploaded: false, username, password, time: future}
         
         let newItem = new ScheduledPhotos(obj);
