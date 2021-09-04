@@ -68,7 +68,7 @@ mongoose.connect(
     `, {useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('then block')
-        clearTimeout(setInterval(() => {console.log('interval'); listener()}, 1000))
+        setInterval(() => {console.log('interval'); listener()}, 100)
         app.listen(port);
     })
     .catch(err => {
