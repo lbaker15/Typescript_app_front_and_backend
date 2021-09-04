@@ -12,7 +12,8 @@ type MyState = {
     show: boolean; photo: any; 
     password: string; username: string;
     message: string; loader: boolean;
-    alert: string;
+    alert: string; time: number;
+    hours: number; mins: number;
 }
 class Alert extends React.Component<MyProps, MyState> {
     private handleFileInput: React.RefObject<HTMLInputElement>;
@@ -21,7 +22,8 @@ class Alert extends React.Component<MyProps, MyState> {
         this.handleFileInput = React.createRef();
     }
     state: MyState = { alert: '', show: false, photo: '', 
-    username: '', password: '', message: '', loader: false  }
+    username: '', password: '', message: '', 
+    time: 0, hours: 0, mins: 0, loader: false  }
     instaShow = () => {
         this.setState((prev) => ({
             show: !prev.show
@@ -40,12 +42,16 @@ class Alert extends React.Component<MyProps, MyState> {
         })
     }
     handleSubmit = () => {
-        const {password, username, message, loader} = this.state;
+        let {password, photo, hours, mins, username, message, time, loader} = this.state;
+        if (photo && message.length > 0 && username.length > 0 && password.length > 0) {
         let file = this.state.photo;
         let iName = file.name;
+        time = (hours * 60) + mins;
+        console.log(time)
         const formData = new FormData();
         formData.append('image', file, iName)
         formData.append('username', username)
+        formData.append('time', String(time))
         formData.append('password', password)
         formData.append('message', message)
         this.setState({
@@ -74,6 +80,7 @@ class Alert extends React.Component<MyProps, MyState> {
                 })
             })
         }, 1000)
+        }
     }
     loginCredentials = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
         if (id === 'username') {
@@ -84,6 +91,14 @@ class Alert extends React.Component<MyProps, MyState> {
             this.setState((prev) => ({
                 message: e.target.value
             }))
+        } else if (id === 'hours') {
+            this.setState((prev) => ({
+                hours: Number(e.target.value)
+            }))
+        } else if (id === 'mins') {
+            this.setState((prev) => ({
+                mins: Number(e.target.value)
+            }))
         } else {
             this.setState((prev) => ({
                 password: e.target.value
@@ -92,7 +107,7 @@ class Alert extends React.Component<MyProps, MyState> {
     }
     render() {
         const {alert, closeAlert} = this.props;
-        const {show, username, password, message, photo, loader} = this.state;
+        const {show, username, password, message, photo, loader, hours, mins, time} = this.state;
         console.log(loader)
         return (
             <React.Fragment>
@@ -134,6 +149,18 @@ class Alert extends React.Component<MyProps, MyState> {
                                     label="Message"
                                     id="message"
                                     value={message}
+                                    onChange={this.loginCredentials}
+                                    />
+                                    <Input 
+                                    label="Scheduled time (in hours)"
+                                    id="hours"
+                                    value={hours}
+                                    onChange={this.loginCredentials}
+                                    />
+                                    <Input 
+                                    label="Scheduled time (in minutes)"
+                                    id="mins"
+                                    value={mins}
                                     onChange={this.loginCredentials}
                                     />
                                     {this.state.alert && (

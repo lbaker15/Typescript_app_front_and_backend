@@ -13,7 +13,11 @@ class Input extends React.Component<MyProps, MyState> {
             <React.Fragment>
                 <label style={{fontWeight: 500}}>{label} :</label>
                 <input 
-                id={id} value={value}
+                id={id} 
+                step={id === 'time' ? 1 : '' }
+                min={id === 'time' ? 0 : '' }
+                type={id === 'time' ? 'number' : 'text'} 
+                value={value}
                 onChange={(e) => onChange(e, e.target.id)}
                 />
             </React.Fragment>

@@ -64,9 +64,7 @@ class AddPlace extends React.Component {
         })
     }
     render() {
-        console.log(this.state)
         const {name, telephone, address, category, photo, alert} = this.state;
-        console.log('cherker', alert.length > 0)
         return (
             <div style={{height: '100vh'}} className="padding">
                 <div style={{display: 'flex', background: 'rgba(255, 255, 255, 0.05)', flexDirection: 'column', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}} className="addPlace">
@@ -102,7 +100,7 @@ class AddPlace extends React.Component {
                     <Button 
                     specifiedClass="null"
                     stringg={'Submit'} handleClick={this.handleClick} />
-                    {(alert.length > 0) ? (                  
+                    {(alert.length === 0) ? (                  
                         <Alert alert={alert} closeAlert={this.closeAlert} />
                     ): null}
                 </div>
