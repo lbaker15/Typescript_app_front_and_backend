@@ -100,7 +100,7 @@ class AddPlace extends React.Component {
                     <Button 
                     specifiedClass="null"
                     stringg={'Submit'} handleClick={this.handleClick} />
-                    {(alert.length === 0) ? (                  
+                    {(alert.length > 0) ? (                  
                         <Alert alert={alert} closeAlert={this.closeAlert} />
                     ): null}
                 </div>
