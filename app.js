@@ -47,10 +47,10 @@ const listener = () => {
                     let {message, username, password} = x;
                     // if (diff < 60000) {
                         console.log('this section fired')
-                        setTimeout(() => {
+                        // setTimeout(() => {
                             console.log('in the timeout')
                             upload.actualUpload(id, message, username, password, originalname)
-                        }, diff)
+                        // }, diff)
                     // }
                     
                 } else {
