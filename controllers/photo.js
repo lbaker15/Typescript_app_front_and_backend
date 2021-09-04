@@ -25,7 +25,8 @@ const uploadPhoto = (req, response, next) => {
         let future = now + (Number(time)*1000);
         let obj =  {"location": location, message, uploaded: false, username, password, time: future}
         
-        new ScheduledPhotos(obj).then(result => {
+        let newItem = new ScheduledPhotos(obj);
+        newItem.save().then(result => {
             console.log(result)
         })
         // console.log(username, password, message)
