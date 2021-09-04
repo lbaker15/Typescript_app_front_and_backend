@@ -43,7 +43,7 @@ const actualUpload = (id, message, username, password, originalname) => {
         }
         getImage().then(async(img) => {
             console.log('actualUpload', img)
-        }
+        })
         //     let buffer = img.Body
         //     console.log('buffer', buffer)
         //     let formData = new FormData();
