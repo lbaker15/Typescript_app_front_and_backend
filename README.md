@@ -1,6 +1,6 @@
 
 <h1>About The Project</h1>
-<p>This is an app that allows users to add favourite restaurants that other users can then use to search for restaurants under a certain category.  After the restaurant is added there is an option to share a photo (of food) to instagram, users are able to schedule a certain time the photo is uploaded.
+<p>This is an app that allows users to add favourite restaurants that other users can then use to search for restaurants under a certain category.  After the restaurant is added there is an option to share a photo (of their food) to instagram, users are able to schedule a certain time the photo is uploaded.
 </p>
 
 <h1>Built With</h1>
