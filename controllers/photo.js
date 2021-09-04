@@ -28,7 +28,7 @@ const uploadPhoto = (req, response, next) => {
         let newItem = new ScheduledPhotos(obj);
         newItem.save().then(result => {
             if (result) {
-                res.json({'Success': 'Scheduled'})
+                response.json({'Success': 'Scheduled'})
             }
         })
         // console.log(username, password, message)
