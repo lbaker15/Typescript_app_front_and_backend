@@ -42,62 +42,60 @@ const actualUpload = (id, message, username, password, originalname) => {
             return data
         }
         getImage().then(async(img) => {
-            console.log('actualUpload', img)
+            let buffer = img.Body
+            console.log('buffer', buffer)
+            let formData = new FormData();
+            formData.append('image', buffer)
+            await fetch('https://api.imgur.com/3/image', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    Authorization: 'Client-ID 8f1d643d8417402'
+                }
+            })
+            .then(res => {
+                // console.log(res)
+                if (res.status === 200) {
+                    return res.json()
+                } else {
+                    throw new Error('Could not upload to imgur')
+                }
+            })
+            .then(async (resolve) => {
+                let photo = resolve.data.link;
+                let deleteHash = resolve.data.deleteHash;
+                console.log('IMGUR PHOTO HAS UPLOADED', username, password)
+                let data = await uploadInsta(photo, message, String(username), String(password));
+                if(data.name !== 'Error') {
+                    let deleteHash = resolve.data.deletehash;
+                    fetch(`https://api.imgur.com/3/image/${deleteHash}`, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: 'Client-ID 8f1d643d8417402'
+                        }
+                    })
+                    .then(res => {
+                        if (res.status === 200) {
+                            console.log('imgur image deleted')
+                            response.json({'Success': 'uploaded'})
+                        } else {
+                            return new Error({'Error': res})
+                        }
+                    })
+                    .catch(err => {throw new Error(err)})
+                } else {
+                    throw new Error({'Error': data.message})
+                }
+            })       
+            .catch(err => {
+                console.log('catch block 1', err)
+                throw new Error(err)
+            })     
         })
-        //     let buffer = img.Body
-        //     console.log('buffer', buffer)
-        //     let formData = new FormData();
-        //     formData.append('image', buffer)
-        //     await fetch('https://api.imgur.com/3/image', {
-        //         method: 'POST',
-        //         body: formData,
-        //         headers: {
-        //             Authorization: 'Client-ID 8f1d643d8417402'
-        //         }
-        //     })
-        //     .then(res => {
-        //         // console.log(res)
-        //         if (res.status === 200) {
-        //             return res.json()
-        //         } else {
-        //             throw new Error('Could not upload to imgur')
-        //         }
-        //     })
-        //     .then(async (resolve) => {
-        //         let photo = resolve.data.link;
-        //         let deleteHash = resolve.data.deleteHash;
-        //         console.log('IMGUR PHOTO HAS UPLOADED', username, password)
-        //         let data = await uploadInsta(photo, message, String(username), String(password));
-        //         if(data.name !== 'Error') {
-        //             let deleteHash = resolve.data.deletehash;
-        //             fetch(`https://api.imgur.com/3/image/${deleteHash}`, {
-        //                 method: 'POST',
-        //                 headers: {
-        //                     Authorization: 'Client-ID 8f1d643d8417402'
-        //                 }
-        //             })
-        //             .then(res => {
-        //                 if (res.status === 200) {
-        //                     console.log('imgur image deleted')
-        //                     response.json({'Success': 'uploaded'})
-        //                 } else {
-        //                     return new Error({'Error': res})
-        //                 }
-        //             })
-        //             .catch(err => {throw new Error(err)})
-        //         } else {
-        //             throw new Error({'Error': data.message})
-        //         }
-        //     })       
-        //     .catch(err => {
-        //         console.log('catch block 1', err)
-        //         throw new Error(err)
-        //     })     
-        // })
-        // .catch(err => {
-        //     console.log('catch block 2')
-        //     new Error(err)
-        // })
+        .catch(err => {
+            console.log('catch block 2')
+            new Error(err)
+        })
 }
 
 const uploadInsta = async (myPhoto, message, user, pass) => {
