@@ -76,7 +76,10 @@ const actualUpload = (id, message, username, password, originalname) => {
                     })
                     .then(res => {
                         if (res.status === 200) {
-                            console.log('imgur image deleted')
+                            console.log('imgur image deleted', id)
+                            ScheduledPhotos.findOneAndUpdate({_id: id}, {uploaded: true}, (err, result) => {
+                                console.log(err, result)
+                            })
                             // response.json({'Success': 'uploaded'})
                         } else {
                             return new Error({'Error': res})
