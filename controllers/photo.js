@@ -22,7 +22,9 @@ const uploadPhoto = (req, response, next) => {
         const {username, password, message, time} = req.body;
         const {location} = req.file;
         let obj =  {"location": location, message, username, password, time}
-        console.log(obj)
+        new ScheduledPhotos(obj).then(result => {
+            console.log(result)
+        })
         // console.log(username, password, message)
         // const myBucket = 'multertest123';
         // const getImage = async() => {
