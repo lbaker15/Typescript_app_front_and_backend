@@ -31,14 +31,19 @@ const uploadPhoto = (req, response, next) => {
                 response.json({'Success': 'Scheduled'})
             }
         })
-        // console.log(username, password, message)
-        // let name = req.file.originalname;
-        // const myBucket = 'multertest123';
-        // const getImage = async() => {
-        //     const data = s3.getObject({Bucket: myBucket, Key: name}).promise()
-        //     return data
-        // }
-        // getImage().then(async(img) => {
+}
+
+const actualUpload = (id, message, username, password, originalname) => {
+
+        let name = originalname;
+        const myBucket = 'multertest123';
+        const getImage = async() => {
+            const data = s3.getObject({Bucket: myBucket, Key: name}).promise()
+            return data
+        }
+        getImage().then(async(img) => {
+            console.log('actualUpload', img)
+        }
         //     let buffer = img.Body
         //     console.log('buffer', buffer)
         //     let formData = new FormData();
@@ -131,3 +136,4 @@ const uploadInsta = async (myPhoto, message, user, pass) => {
 }
 
 exports.uploadPhoto = uploadPhoto;
+exports.actualUpload = actualUpload;

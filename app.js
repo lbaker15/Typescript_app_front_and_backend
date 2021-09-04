@@ -7,6 +7,7 @@ const cors = require('cors');
 const port = process.env.PORT || 3000;
 const HttpError = require('./models/http-error');
 const ScheduledPhotos = require('./models/scheduled-photos');
+const upload = require('./controllers/photo');
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
@@ -48,7 +49,7 @@ const listener = () => {
                         console.log('this section fired')
                         setTimeout(() => {
                             console.log('in the timeout')
-                            //upload.theUpload(id, message, username, password)
+                            upload.actualUpload(id, message, username, password, originalname)
                         }, diff)
                     }
                     
