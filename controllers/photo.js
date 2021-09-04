@@ -22,8 +22,8 @@ const uploadPhoto = (req, response, next) => {
         const {username, password, message, time} = req.body;
         const {location} = req.file;
         let now = new Date().getTime();
-        let future = now + (Number(time)*10);
-        let obj =  {"location": location, message, username, password, time: future}
+        let future = now + (Number(time)*1000);
+        let obj =  {"location": location, message, uploaded: false, username, password, time: future}
         
         new ScheduledPhotos(obj).then(result => {
             console.log(result)
