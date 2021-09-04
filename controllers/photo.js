@@ -65,7 +65,7 @@ const actualUpload = (id, message, username, password, originalname) => {
                 let photo = resolve.data.link;
                 let deleteHash = resolve.data.deleteHash;
                 console.log('IMGUR PHOTO HAS UPLOADED', username, password)
-                let data = await uploadInsta(photo, message, String(username), String(password));
+                let data = await uploadInsta(photo, String(message), String(username), String(password));
                 if(data.name !== 'Error') {
                     let deleteHash = resolve.data.deletehash;
                     fetch(`https://api.imgur.com/3/image/${deleteHash}`, {
@@ -77,7 +77,7 @@ const actualUpload = (id, message, username, password, originalname) => {
                     .then(res => {
                         if (res.status === 200) {
                             console.log('imgur image deleted')
-                            response.json({'Success': 'uploaded'})
+                            // response.json({'Success': 'uploaded'})
                         } else {
                             return new Error({'Error': res})
                         }
@@ -88,7 +88,7 @@ const actualUpload = (id, message, username, password, originalname) => {
                 }
             })       
             .catch(err => {
-                console.log('catch block 1', err)
+                console.log('catch block 1', err.message)
                 throw new Error(err)
             })     
         })
