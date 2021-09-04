@@ -38,20 +38,19 @@ const listener = () => {
             if (x.uploaded === false) {
                 //COULD HAVE LOGGING FOR PHOTOS IN THE PAST THAT HAVE NOT UPLOADED
                 let now = new Date().getTime()
-                if (now < x.time) {                     
+                if (now < x.time) {        
+                    console.log('NOW', now, 'TIME', x.time)             
                     //SET TIMEOUT FOR EACH ONE
                     let diff = x.time - now;
-                    console.log(diff, x)
-                    // let id = x._id; 
-                    // let {message, username, password} = x;
-                    // console.log('INFO:', diff, id, message, username, password)
-                    // if (diff < 60000) {
-                    //     console.log('this section fired')
-                    //     setTimeout(() => {
-                    //         console.log('in the timeout')
-                    //         upload.theUpload(id, message, username, password)
-                    //     }, diff)
-                    // }
+                    let id = x._id; 
+                    let {message, username, password} = x;
+                    if (diff < 60000) {
+                        console.log('this section fired')
+                        setTimeout(() => {
+                            console.log('in the timeout')
+                            //upload.theUpload(id, message, username, password)
+                        }, diff)
+                    }
                     
                 } else {
                     //BASED ON TIME THIS SHOULD HAVE ALREADY UPLOADED
