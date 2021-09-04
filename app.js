@@ -67,7 +67,7 @@ mongoose.connect(
     `mongodb+srv://lbaker15:4rtghlae@cluster0.8pqo6.mongodb.net/Places?retryWrites=true&w=majority
     `, {useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-        clearTimeout(setInterval(() => {listener()}, 1000))
+        clearTimeout(setInterval(() => {console.log('interval'); listener()}, 1000))
         app.listen(port);
     })
     .catch(err => {
