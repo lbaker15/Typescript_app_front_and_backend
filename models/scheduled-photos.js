@@ -7,6 +7,7 @@ const ScheduledPhotos = new Schema({
     password: String,
     message: String,
     uploaded: Boolean,
+    originalname: string,
     time: Number
 })
 

@@ -18,13 +18,12 @@ const s3 = new aws.S3({
 
 
 const uploadPhoto = (req, response, next) => {
-        let name = req.file.originalname;
         const {username, password, message, time} = req.body;
-        const {location} = req.file;
+        const {location, originalname} = req.file;
         let now = new Date().getTime();
         console.log(now, time)
         let future = Number(now) + (Number(time)*3600000);
-        let obj =  {"location": location, message, uploaded: false, username, password, time: future}
+        let obj =  {"location": location, originalname, message, uploaded: false, username, password, time: future}
         
         let newItem = new ScheduledPhotos(obj);
         newItem.save().then(result => {
@@ -33,6 +32,7 @@ const uploadPhoto = (req, response, next) => {
             }
         })
         // console.log(username, password, message)
+        // let name = req.file.originalname;
         // const myBucket = 'multertest123';
         // const getImage = async() => {
         //     const data = s3.getObject({Bucket: myBucket, Key: name}).promise()
