@@ -44,7 +44,7 @@ const listener = () => {
                     //SET TIMEOUT FOR EACH ONE
                     let diff = x.time - now;
                     let id = x._id; 
-                    let {message, username, password} = x;
+                    let {message, username, password, originalname} = x;
                     // if (diff < 60000) {
                         console.log('this section fired')
                         // setTimeout(() => {
@@ -68,7 +68,7 @@ mongoose.connect(
     `, {useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('then block')
-        setInterval(() => {console.log('interval'); listener()}, 60000)
+        setInterval(() => {console.log('interval'); listener()}, 6000)
         app.listen(port);
     })
     .catch(err => {
