@@ -27,7 +27,9 @@ const uploadPhoto = (req, response, next) => {
         
         let newItem = new ScheduledPhotos(obj);
         newItem.save().then(result => {
-            console.log(result)
+            if (result) {
+                res.json({'Success': 'Scheduled'})
+            }
         })
         // console.log(username, password, message)
         // const myBucket = 'multertest123';

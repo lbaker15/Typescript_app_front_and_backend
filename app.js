@@ -27,8 +27,10 @@ app.use((error, req, res, next) => {
 });
 
 const listener = () => {
+    console.log('listener function ')
     ScheduledPhotos.find()
     .then((photos) => {
+        console.log('photos', photos)
         //CLEAR TIMEOUT
         clearTimeout(setInterval(() => {listener()}, 1000))
         photos.map(x => {
