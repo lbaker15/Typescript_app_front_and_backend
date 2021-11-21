@@ -12,13 +12,15 @@ const getProviders = async (req, res, next) => {
     let addressEdit = await helpers.stringReplace(address)
     let clientAddress; 
     try {
+        //AIzaSyAF8Tue0UNWttINWtoAeohWmagOUlDMCeg
         const {data} = await axios.post(`
             https://maps.googleapis.com/maps/api/geocode/json?address=${addressEdit}&key=${key}
         `)
         if (data.results[0]) {
             clientAddress = data.results[0].geometry.location;
         } else {
-            res.json({'Failure': 'key invalid'});
+            console.log('fail')
+            res.json({'Fail': 'key invalid'});
         }
         console.log(clientAddress)
     } catch(err) {
