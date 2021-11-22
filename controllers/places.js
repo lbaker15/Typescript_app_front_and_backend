@@ -53,14 +53,15 @@ const getProviders = async (req, res, next) => {
 }
 
 const addProvider = async (req, res, next) => {
-    let { address, name, telephone, bedrooms, photo } = req.body;
+    let { address, name, telephone, bedrooms, propertyType, photo } = req.body;
     if (address && name && telephone && bedrooms) {
             let obj = {
                 name: String(name).toLowerCase(),
                 businessAddress: String(address).toLowerCase(),
                 telephone: Number(telephone),
                 bedrooms: String(bedrooms).toLowerCase(),
-                photo: req.file.location
+                photo: req.file.location,
+                propertyType: String(propertyType).toLowerCase()
             }
             let address2;
             try {
