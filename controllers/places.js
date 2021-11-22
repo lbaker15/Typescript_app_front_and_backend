@@ -5,7 +5,7 @@ const Places = require('../models/places');
 const HttpError = require('../models/http-error');
 
 const getProviders = async (req, res, next) => {
-    let {address, distanceLimit, category} = req.body;
+    let {address, distanceLimit, bedrooms} = req.body;
     console.log('fired')
     distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
     address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
@@ -36,8 +36,8 @@ const getProviders = async (req, res, next) => {
                 let data = await helpers.getDistance(obj, clientAddress)
                 let km = Number(data)/1000
                 if (km < distanceLimit) {
-                    if (category) {
-                        if (x.category === category.toLowerCase()) {
+                    if (bedrooms) {
+                        if (x.bedrooms === bedrooms.toLowerCase()) {
                             return array.push(x)
                         }
                     } else {
@@ -53,13 +53,13 @@ const getProviders = async (req, res, next) => {
 }
 
 const addProvider = async (req, res, next) => {
-    let { address, name, telephone, category, photo } = req.body;
-    if (address && name && telephone && category) {
+    let { address, name, telephone, bedrooms, photo } = req.body;
+    if (address && name && telephone && bedrooms) {
             let obj = {
                 name: String(name).toLowerCase(),
                 businessAddress: String(address).toLowerCase(),
                 telephone: Number(telephone),
-                category: String(category).toLowerCase(),
+                bedrooms: String(bedrooms).toLowerCase(),
                 photo: req.file.location
             }
             let address2;
