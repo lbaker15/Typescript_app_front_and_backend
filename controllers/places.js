@@ -6,10 +6,10 @@ const HttpError = require('../models/http-error');
 
 const getProviders = async (req, res, next) => {
     let {address, distanceLimit, bedrooms} = req.body;
-    console.log('fired')
     distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
     address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
-    let addressEdit = await helpers.stringReplace(address)
+
+    let addressEdit = await helpers.stringReplace(address);
     let clientAddress; 
     try {
         //AIzaSyAF8Tue0UNWttINWtoAeohWmagOUlDMCeg
@@ -36,13 +36,13 @@ const getProviders = async (req, res, next) => {
                 let data = await helpers.getDistance(obj, clientAddress)
                 let km = Number(data)/1000
                 if (km < distanceLimit) {
-                    if (bedrooms) {
+                   
                         if (x.bedrooms === bedrooms.toLowerCase()) {
-                            return array.push(x)
+                            if (x.propertytype === x.propertytype.toLowerCase()) {
+                                return array.push(x)
+                            }
                         }
-                    } else {
-                        return array.push(x)
-                    }
+                  
                 } else { return }
             })
             Promise.all(promises).then(() => {
