@@ -7,6 +7,7 @@ const Places = new Schema({
     name: String,
     telephone: Number,
     photo: String,
+    propertytype: String,
     category: String
 })
 
