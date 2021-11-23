@@ -37,13 +37,29 @@ const getProviders = async (req, res, next) => {
                 if (km < distanceLimit) {
                     if (bedrooms) {
                         console.log('bedrooms')
-                        if (x.bedrooms === bedrooms.toLowerCase()) {
-                            if (x.propertytype === x.propertytype.toLowerCase()) {
+                        if (propertytype) {
+                            console.log('property type')
+                            if (x.bedrooms === bedrooms.toLowerCase() && x.propertytype === x.propertytype.toLowerCase()) {
+                                return array.push(x)
+                            }
+                        } else {
+                            console.log('no property type')
+                            if (x.bedrooms === bedrooms.toLowerCase()) {
                                 return array.push(x)
                             }
                         }
+                        
                     } else {
                         console.log('no bedrooms')
+                        if (propertytype) {
+                            console.log('property type')
+                            if (x.propertytype === x.propertytype.toLowerCase()) {
+                                return array.push(x)
+                            }
+                        } else {
+                            console.log('no property type')
+                            return array.push(x)
+                        }
                     }
                   
                 } else { return }
