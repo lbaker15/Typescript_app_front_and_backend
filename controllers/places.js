@@ -8,7 +8,6 @@ const getProviders = async (req, res, next) => {
     let {address, distanceLimit, bedrooms} = req.body;
     distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
     address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
-
     let addressEdit = await helpers.stringReplace(address);
     let clientAddress; 
     try {
@@ -36,12 +35,16 @@ const getProviders = async (req, res, next) => {
                 let data = await helpers.getDistance(obj, clientAddress)
                 let km = Number(data)/1000
                 if (km < distanceLimit) {
-                   
+                    if (bedrooms) {
+                        console.log('bedrooms')
                         if (x.bedrooms === bedrooms.toLowerCase()) {
                             if (x.propertytype === x.propertytype.toLowerCase()) {
                                 return array.push(x)
                             }
                         }
+                    } else {
+                        console.log('no bedrooms')
+                    }
                   
                 } else { return }
             })
