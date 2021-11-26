@@ -8,7 +8,8 @@ const Places = new Schema({
     telephone: Number,
     photo: String,
     propertytype: String,
-    category: String
+    category: String,
+    author: String
 })
 
 module.exports = mongoose.model('Places', Places)
