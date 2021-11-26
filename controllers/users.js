@@ -2,8 +2,18 @@ const Users = require('../models/users');
 const HttpError = require('../models/http-error');
 
 const getUser = async (req, res, next) => {
-    return res.json({'Key': 'value'})
+    const {email, password} = req.body;
+    Users.find({email: email, password: password}, async (err, result) => {
+        if (result) {
+            console.log(result)
+            return res.json({'Key': 'value'})
+        } else {
+            console.log(err)
+            return res.json({'Key': 'value'})
+        }
+    })
 }
+
 const addUser = async (req, res, next) => {
     const {email, password} = req.body;
     let obj = {email, password};
