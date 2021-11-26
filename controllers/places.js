@@ -40,7 +40,7 @@ const getProviders = async (req, res, next) => {
                         console.log('bedrooms')
                         if (propertytype) {
                             console.log('property type')
-                            if (x.bedrooms === bedrooms.toLowerCase() && x.propertytype === x.propertytype.toLowerCase()) {
+                            if (x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
                                 return array.push(x)
                             }
                         } else {
@@ -54,7 +54,7 @@ const getProviders = async (req, res, next) => {
                         console.log('no bedrooms')
                         if (propertytype) {
                             console.log('property type')
-                            if (x.propertytype === x.propertytype.toLowerCase()) {
+                            if (x.propertytype === propertytype.toLowerCase()) {
                                 return array.push(x)
                             }
                         } else {
