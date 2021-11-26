@@ -5,11 +5,11 @@ const getUser = async (req, res, next) => {
     const {email, password} = req.body;
     Users.find({email: email, password: password}, async (err, result) => {
         if (result) {
-            console.log(result)
-            return res.json({'Key': 'value'})
+            let id = result[0]._id;
+            return res.json({'Token': id})
         } else {
             console.log(err)
-            return res.json({'Key': 'value'})
+            return res.json({'Failure': 'user not found'})
         }
     })
 }
