@@ -29,7 +29,7 @@ const getProviders = async (req, res, next) => {
     let array = new Array;
     //CHECK OTHER CONDITIONS HERE - PROVIDERS GENDER, AGE, TREATMENT E
     Places.find({}, async (err, result) => {
-        console.log('RESULT', result)
+        console.log('RESULT', bedrooms, propertytype)
         if (result) {       
             let promises = result.map(async (x) => {
                 let obj = {'lat': x.lat, 'lng': x.lng}

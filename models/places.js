@@ -8,6 +8,7 @@ const Places = new Schema({
     telephone: Number,
     photo: String,
     propertytype: String,
+    bedrooms: String,
     category: String,
     author: String
 })
