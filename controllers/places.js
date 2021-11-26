@@ -6,6 +6,7 @@ const HttpError = require('../models/http-error');
 
 const getProviders = async (req, res, next) => {
     let {address, distanceLimit, bedrooms} = req.body;
+    console.log('fired')
     distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
     address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
     let addressEdit = await helpers.stringReplace(address);
