@@ -9,7 +9,7 @@ const bucket = require('../middleware/upload');
 
 router.post('/places', controller.getProviders);
 router.post('/add-user', controller3.addUser);
-router.get('/get-user', controller3.getUser);
+router.post('/get-user', controller3.getUser);
 router.post('/add-place', bucket.fileUpload, controller.addProvider);
 router.post('/insta-upload', bucket.fileUpload, controller2.uploadPhoto);
 
