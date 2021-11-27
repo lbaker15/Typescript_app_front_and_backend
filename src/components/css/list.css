@@ -1,3 +1,7 @@
+:root {
+    --colorAccent: rgb(106, 108, 243);
+}
+
 .list {
     margin-top: 50px;
     font-family: Manrope;
@@ -32,9 +36,12 @@
     height: 10px; background: #f7f7f7; border-radius: 25px;
 }
 .distance input[type=range]::-webkit-slider-thumb {
-    height: 20px; width: 20px; background: rgb(129, 131, 255);
+    height: 20px; width: 20px; background: var(--colorAccent);
     -webkit-appearance: none;
     border-radius: 50%;
     margin-top: -5px;
     box-shadow: 1px 1px 6px #9c9c9c;
+}
+.btn-selected {
+    background: var(--colorAccent) !important;
 }

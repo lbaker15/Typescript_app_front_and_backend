@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { MyState, reducer } from "../reducers";
 import { RootState } from '../store';
+import {centerVal} from './centerVal';
 
 let key = 'AIzaSyCNxlh-79Og3dQ_tYpV_Vzlkx3kAPyZ6HI';
 const loader = new Loader({
@@ -20,7 +21,7 @@ class Map extends React.Component<MyProps> {
         loader.load().then(() => {
             setTimeout(() => {
                 let map = new window.google.maps.Map( document.getElementById("map") as HTMLElement, {
-                    center: { lat: 53.9555583, lng: -1.0308132 },
+                    center: centerVal,
                     zoom: 14,
                 });
                 console.log('MAP', map)

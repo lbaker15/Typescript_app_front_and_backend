@@ -1,18 +1,20 @@
 import React from 'react';
+// import {categories} from './data/categories';
 
-let categories = [
-    'Indian',
-    'Chinese',
-    'Italian'
-]
+// let categories = [
+//     '1 bed',
+//     '2 bed',
+//     '3+ bed'
+// ] 
 type MyProps = {
+    array: string[];
     name: string;
     handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     value: string;
 }
 class Dropdown extends React.Component<MyProps> {
     render() {
-        const {handleChange, name, value} = this.props;
+        const {handleChange, name, value, array} = this.props;
         return (
             <React.Fragment>
                 <div className="col">
@@ -28,7 +30,7 @@ class Dropdown extends React.Component<MyProps> {
                         border: '1px solid #c3c3c3'}}
                     onChange={handleChange}>
                         <option value={''}>Please select...</option>
-                        {categories.map(x => {
+                        {array.map(x => {
                             return <option key={x} style={{fontFamily: 'Manrope'}} value={x}>{x}</option>
                         })
                         }

@@ -4,6 +4,7 @@ import Form from './components/loginForm';
 import Dashboard from './components/dashboard';
 import AddPlace from './components/addPlace';
 import Header from './components/header';
+import Logout from './components/logout';
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 
 
@@ -15,13 +16,17 @@ class App extends React.Component {
     validated: false
   }
   componentDidMount() {
-    let cookie = document.cookie.match(new RegExp('(^| )' + 'tokenName' + '=([^;]+)'));
-        if (cookie) {
-            this.setState({
-                validated: true
-            })
-        }
+    setTimeout(() => {
+      let cookie = document.cookie.match(new RegExp('(^| )' + 'tokenName' + '=([^;]+)'));
+          if (cookie) {
+              this.setState({
+                  validated: true
+              })
+          }
+      // console.log('mount', cookie, this.state.validated)
+    }, 2000)
   }
+
   render() {
     const {validated} = this.state;
     return (
@@ -33,13 +38,18 @@ class App extends React.Component {
             )} />
             
             <Route path="/dashboard">
-                  <Header tabs={validated ? ['Home', 'Add Place', 'Log out'] : ['Home', 'Add Place', 'Login']} />
+                  <Header  />
                   <Dashboard />
             </Route>
 
             <Route path="/addplace">
-                  <Header tabs={validated ? ['Home', 'Add Place', 'Log out'] : ['Home', 'Add Place', 'Login']} />
+                  <Header />
                   <AddPlace />
+            </Route>
+
+            <Route path="/logout">
+                  <Header />
+                  <Logout />
             </Route>
 
         </Switch>

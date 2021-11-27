@@ -84,3 +84,25 @@
     font-family: Manrope;
     font-size: 18px; font-weight: 300;
 }
+
+.plusSign {
+    font-size: 25px;
+    padding-right: 5px;
+}
+.btn2 {
+    padding: 4px 22px;
+    border-radius: 3px;
+    margin-left: 10px;
+    background: rgb(0, 0, 0);
+    color: white;
+    font-family: Manrope;
+    border: none;
+}
+.flex-col {
+    display: flex;
+}
+.button-col {
+    width: 220px;
+    display: flex; flex-direction: column;
+    align-items: center;
+}

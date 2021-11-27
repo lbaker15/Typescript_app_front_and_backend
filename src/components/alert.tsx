@@ -7,6 +7,7 @@ import Upload from './upload';
 type MyProps = {
     alert: string;
     closeAlert: () => void;
+    successfulSubmit: boolean;
 }
 type MyState = {
     show: boolean; photo: any; 
@@ -106,7 +107,7 @@ class Alert extends React.Component<MyProps, MyState> {
         }
     }
     render() {
-        const {alert, closeAlert} = this.props;
+        const {alert, closeAlert, successfulSubmit} = this.props;
         const {show, username, password, message, photo, loader, hours, mins, time} = this.state;
         console.log(loader)
         return (
@@ -118,7 +119,8 @@ class Alert extends React.Component<MyProps, MyState> {
                         <button 
                         onClick={closeAlert} className="alertClose">X</button>
                         <h3>{alert}</h3>
-                        <div>
+
+                        <div style={successfulSubmit ? {display: 'block'} : {display: 'none'}} >
                             <button 
                             className="instagramShare"
                             onClick={this.instaShow}
@@ -172,6 +174,7 @@ class Alert extends React.Component<MyProps, MyState> {
                                 </div>
                             )}
                         </div>
+
                     </div>
             </React.Fragment>
         )

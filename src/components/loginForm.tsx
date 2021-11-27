@@ -6,16 +6,18 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import Wrapper from '../wrapper';
 import Blur from './styling/blur';
+import Alert from './alert';
 
 type MyState = {
     username: string;
     password: string;
     redirect: boolean;
+    alert: string;
 }
 type MyProps = {}
 class Form extends React.Component<MyProps> {
     state: MyState = {
-        username: '', password: '', redirect: false,
+        username: '', password: '', redirect: false, alert: ''
     }
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -24,22 +26,47 @@ class Form extends React.Component<MyProps> {
     }
     handleSubmit = () => {
         const {username, password} = this.state;
-        if (username.length > 1 && password.length > 1) {
-            let token = '1234'; let name = 'tokenName'; 
-            let now = new Date()
-            let time = now.getTime()
-            time += 1 * 3600 * 1000
-            now.setTime(time)
-            document.cookie = name + "=" + token + ";expires=" + now.toUTCString() +";path=/";
-            setTimeout(() => {
-                this.setState({
-                    redirect: true
-                })
-            }, 1000)
+        if (username.length > 0 && password.length > 0) {
+            let obj = {email: username, password}
+            fetch('https://places-find.herokuapp.com/admin/get-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            }).then((res) => res.json())
+            .then(data => {
+                console.log('then')
+                if (data.Token) {
+                    let name = 'tokenName'; 
+                    let token = data.Token;
+                    let now = new Date()
+                    let time = now.getTime()
+                    time += 1 * 3600 * 1000
+                    now.setTime(time)
+                    document.cookie = name + "=" + token + ";expires=" + now.toUTCString() +";path=/";
+                    setTimeout(() => {
+                        this.setState({
+                            redirect: true
+                        })
+                    }, 1000)
+                } else {
+                    //HANDLE FAILED LOGIN HERE
+                    this.setState({
+                        alert: 'Please ensure login details are correct.'
+                    })
+                } 
+            })
         }
     }
+    closeAlert = () => {
+        this.setState({
+            alert: ''
+        })
+    }
     render() {
-        const {username, password, redirect} = this.state;
+        const {username, password, redirect, alert} = this.state;
+        console.log(alert)
         return (
             <React.Fragment>
                 {redirect && <Redirect to="/dashboard" />}
@@ -52,6 +79,9 @@ class Form extends React.Component<MyProps> {
                             <Button 
                             specifiedClass="null"
                             handleClick={this.handleSubmit} stringg="Submit" />
+                            {alert.length > 0 && (
+                            <Alert alert={alert} successfulSubmit={false} closeAlert={this.closeAlert} />
+                            )}
                         </div>
                         <Blur opacity={0.6} blur={80} left={-100} bottom={-50} right={1} top={1} />
                         <Blur opacity={0.6} blur={80} left={1} right={-50} top={-50} bottom={1} />

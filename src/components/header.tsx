@@ -3,10 +3,10 @@ import { Redirect } from "react-router-dom";
 import './css/header.css';
 
 type MyProps = {
-    tabs: [string, string, string];
+
 }
 class Header extends React.Component<MyProps> {
-    state = {redirect: false, redirectTo: ''}
+    state = {redirect: false, redirectTo: '', validated: false}
     redirect = (e: React.MouseEvent) => {
         let btn = e.target as any
         let theStr = String(btn.value).toLocaleLowerCase()
@@ -25,19 +25,27 @@ class Header extends React.Component<MyProps> {
                 redirect: true, redirectTo: str
             })
         }
-        
+    }
+    componentDidMount() {
+        setTimeout(() => {
+          let cookie = document.cookie.match(new RegExp('(^| )' + 'tokenName' + '=([^;]+)'));
+              if (cookie) {
+                  this.setState({
+                      validated: true
+                  })
+              }
+        }, 200)
     }
     render() {
-        const {tabs} = this.props;
-        const {redirect, redirectTo} = this.state;
-        console.log(redirectTo)
+        const {redirect, redirectTo, validated} = this.state;
+        let tab = (validated)  ? ['Home', 'Add Place', 'Log out'] : ['Home', 'Add Place', 'Login'];
         return (
             <React.Fragment>
                 {redirect && (
                     <Redirect to={'/' + redirectTo} />
                 )}
                 <div className="header">
-                    {tabs.map(x => {
+                    {tab.map(x => {
                         return (
                             <button 
                             onClick={this.redirect}
