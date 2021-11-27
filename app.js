@@ -28,10 +28,10 @@ app.use((error, req, res, next) => {
 });
 
 const listener = () => {
-    console.log('listener function ')
+    // console.log('listener function ')
     ScheduledPhotos.find()
     .then((photos) => {
-        console.log('photos', photos)
+        // console.log('photos', photos)
         //CLEAR TIMEOUT
         clearTimeout(setInterval(() => {listener()}, 1000))
         photos.map(x => {
@@ -40,15 +40,15 @@ const listener = () => {
                 //COULD HAVE LOGGING FOR PHOTOS IN THE PAST THAT HAVE NOT UPLOADED
                 let now = new Date().getTime()
                 if (now < x.time) {        
-                    console.log('NOW', now, 'TIME', x.time)             
+                    // console.log('NOW', now, 'TIME', x.time)             
                     //SET TIMEOUT FOR EACH ONE
                     let diff = x.time - now;
                     let id = x._id; 
                     let {message, username, password, originalname} = x;
                     if (diff < 60000) {
-                        console.log('this section fired')
+                        // console.log('this section fired')
                         setTimeout(() => {
-                            console.log('in the timeout')
+                            // console.log('in the timeout')
                             upload.actualUpload(id, message, username, password, originalname)
                         }, diff)
                     }
