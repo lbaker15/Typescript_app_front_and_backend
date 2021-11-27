@@ -4,8 +4,7 @@ const HttpError = require('../models/http-error');
 const getUser = async (req, res, next) => {
     const {email, password} = req.body;
     Users.find({email: email, password: password}, async (err, result) => {
-        if (result) {
-            console.log('result', result)
+        if (result.length > 0) {
             let id = result[0]._id;
             return res.json({'Token': id})
         } else {
