@@ -15,19 +15,17 @@ const getUser = async (req, res, next) => {
 }
 
 const addUser = async (req, res, next) => {
-    // const {email, password} = req.body;
-    // let obj = {email, password};
-    // try {
-    //     let add = new Users(obj)
-    //     add.save().then((data, err) => {
-    //         return res.json({'Data': data})
-    //     })
-    // } catch(err) {
-    //     let error = new HttpError('Could not save provider.', 500)
-    //     return next(error);
-    // }
-    let error = new HttpError('Could not save provider.', 500)
-    return next(error);
+    const {email, password} = req.body;
+    let obj = {email, password};
+    try {
+        let add = new Users(obj)
+        add.save().then((data, err) => {
+            return res.json({'Data': data})
+        })
+    } catch(err) {
+        let error = new HttpError('Could not save provider.', 500)
+        return next(error);
+    }
 }
 
 exports.getUser = getUser;
