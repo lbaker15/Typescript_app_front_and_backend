@@ -1,5 +1,4 @@
-import React, { SyntheticEvent } from "react";
-import Loader from './loader';
+import React, { SyntheticEvent, Suspense } from "react";
 import Search from './search';
 import List from './list';
 import Buttons from './buttons';
@@ -7,29 +6,44 @@ import Distance from './distance';
 import Wrapper from '../wrapper';
 import {connect} from 'react-redux';
 import { Dispatch } from 'redux';
+import { getAll } from "./fetchHelpers/functions";
 import { RootState } from '../store';
 import { addMapRedux } from '../actions/map';
 import './css/dashboard.css';
 import { search } from "./fetchHelpers/functions";
 import {centerVal} from './centerVal';
 import { Redirect } from "react-router";
+import Lightswitch from './shared/lightswitch';
+import Loader from './loader';
+const ListAll = React.lazy(() => import('./listAll'));
 
+interface Data {
+    name: string,
+    _id: string,
+    author: string, bedrooms: string, propertytype: string,
+    businessAddress: string, lat: string, lng: string, photo: string,
+    telephone: number
+}
 type MyState = {
     validated: boolean;
     address: string;
     bedrooms: string; propertytype: string;
-    data: {businessAddress: string; lat: string; lng: string; name: string; telephone: number}[];
+    data: {businessAddress: string; lat: string; lng: string; name: string; telephone: number, propertytype: string, bedrooms: string}[];
     distance: number;
     alert: string; loader: boolean;
-    elapsed: boolean;
+    elapsed: boolean; hideMap: boolean;
+    dataList: Data[];
+    completed: boolean;
 }
 type MyProps = {
     map: {map: object};
 }
 class Dashboard extends React.Component<MyProps> {
     state: MyState = {
+        dataList: [], completed: false,
         alert: '', validated: false, address: '', data: [], bedrooms: '', 
-        propertytype: '', distance: 0, loader: false, elapsed: false
+        propertytype: '', distance: 0, loader: false, elapsed: false,
+        hideMap: false
     }
     componentDidMount() {
         let cookie = document.cookie.match(new RegExp('(^| )' + 'tokenName' + '=([^;]+)'));
@@ -43,6 +57,28 @@ class Dashboard extends React.Component<MyProps> {
                 elapsed: true
             })
         }, 1000)
+        //GET ALL FOR LIST
+        getAll()
+        .then(data => {
+            let d = data.Data
+            if (d) {
+                this.setState({
+                    dataList: []
+                })
+                d.map((item:any, i:number) => {
+                    let {dataList} = this.state;
+                    let newData = dataList.concat(item)
+                    this.setState({
+                        dataList: newData
+                    })
+                    if (i === d.length - 1) {
+                        this.setState({
+                            completed: true
+                        })
+                    }
+                })
+            }
+        })
     }
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -73,13 +109,16 @@ class Dashboard extends React.Component<MyProps> {
                             position: myLatLng,
                             map: map
                         })
+                        let bedroomsE = x.bedrooms; let propertytypeE = x.propertytype;
                         let address = x.businessAddress; let name = x.name; let phone = x.telephone;
                         const infowindow = new google.maps.InfoWindow({
                             content: `
                             <div className="info-window">
                                 <h2><span>Landlord Name:</span> ${name}</h2>
-                                <h2><span>Landlord Number:</span> ${phone}</h2>
-                                <h2>${address}</h2>
+                                <h2><span>Landlord Number:</span> +44${phone}</h2>
+                                <h2><span>Address:</span> ${address}</h2>
+                                <h2><span>Bedrooms:</span> ${bedroomsE}</h2>
+                                <h2><span>Property type:</span> ${propertytypeE}</h2>
                             </div>`,
                         });
                         marker.addListener("click", () => {
@@ -128,16 +167,25 @@ class Dashboard extends React.Component<MyProps> {
             distance: value.value
         })
     }
+    handleSwitch = () => {
+        let val = !this.state.hideMap
+        this.setState((prev) => ({
+            hideMap: val
+        }))
+    }
     render() {
-        const {elapsed, validated, loader, alert, address, data, distance, bedrooms, propertytype} = this.state;
+        const {completed, dataList, hideMap, elapsed, validated, loader, alert, address, data, distance, bedrooms, propertytype} = this.state;
         if (validated) {
             return (
                 <React.Fragment>
                     <div style={{height: 'auto', marginTop: 75}} className="padding">
-                        {/* <Wrapper> */}
                             {loader && (
                                 <Loader background={false} />
                             )}
+                            <div className="inner-1">
+                                <Lightswitch hideMap={hideMap} handleSwitch={this.handleSwitch} />
+                                <span>{hideMap ? 'View Map' : 'View All Properties'}</span>
+                            </div>
                             <Search 
                             handleSubmit={this.handleSubmit} 
                             handleChange={this.handleChange} 
@@ -158,8 +206,11 @@ class Dashboard extends React.Component<MyProps> {
                                     paddingTop: 17, marginBottom: -20, fontSize: 18, fontWeight: 600,
                                     fontFamily: 'Manrope', textAlign: 'center'}}>{alert}</h5>
                             )}
-                            <List />
-                        {/* </Wrapper> */}
+                            {!hideMap ? <List /> : (
+                                <Suspense fallback={<Loader background={false} />}>
+                                    <ListAll data={dataList} completed={completed} />
+                                </Suspense>
+                            )}
                     </div>
                 </React.Fragment>
             )
@@ -167,7 +218,7 @@ class Dashboard extends React.Component<MyProps> {
             return (
                 <div>
                     {!validated && elapsed && (
-                        <Redirect to="/login" />
+                        <Redirect to="/" />
                     )
                     }
                 </div>

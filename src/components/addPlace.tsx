@@ -14,16 +14,15 @@ type MyState = {
     name: string; telephone: string; 
     address: string; bedrooms: string;
     alert: string; photo: any; successfulSubmit: boolean;
-    propertytype: string;
+    propertytype: string; advert: string;
 }
 class AddPlace extends React.Component {
     state: MyState =  {
         successfulSubmit: false, photo: '', name: '', 
         telephone: '', address: '', bedrooms: '', 
-        alert: '', propertytype: ''
+        alert: '', propertytype: '', advert: ''
     }
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -43,36 +42,47 @@ class AddPlace extends React.Component {
         }
     }
     handleClick = () => {
-        const {name, telephone, address, bedrooms, photo, propertytype} = this.state;
+        const {name, advert, telephone, address, bedrooms, photo, propertytype} = this.state;
         let file = photo;
 
         if (file) {
             let iName = file.name;
             let author = document.cookie.match(new RegExp('(^| )' + 'tokenName' + '=([^;]+)'));
-            let a = (author) ? author[2] : 'null';
-            const formData = new FormData();
-            formData.append('image', file, iName);
-            formData.append('author', a);
-            formData.append('name', name); formData.append('telephone', telephone);
-            formData.append('address', address); formData.append('bedrooms', bedrooms); 
-            formData.append('propertytype', propertytype);    
-            if (propertytype.length > 0 && name.length > 0 && photo && telephone.length > 0 && address.length > 0 && bedrooms.length > 0) {
-                addPlace(formData).then(data => {
-                    if (data.Data) {
-                        this.setState({
-                            alert: 'Place added.',
-                            successfulSubmit: true
-                        })
-                    } else {
-                        //HANDLE FETCH ERROR 
-                    }
-                })
+            if (author) {
+                let a = (author) ? author[2] : 'null';
+                const formData = new FormData();
+                formData.append('image', file, iName);
+                formData.append('advert', advert);
+                formData.append('author', a);
+                formData.append('name', name); formData.append('telephone', telephone);
+                formData.append('address', address); formData.append('bedrooms', bedrooms); 
+                formData.append('propertytype', propertytype);    
+                if (advert.length > 0 && propertytype.length > 0 && name.length > 0 && photo && telephone.length > 0 && address.length > 0 && bedrooms.length > 0) {
+                    addPlace(formData).then(data => {
+                        if (data.Data) {
+                            this.setState({
+                                alert: 'Place added.',
+                                successfulSubmit: true
+                            })
+                        } else {
+                            this.setState({
+                                alert: 'Could not be added, please ensure all inputs are entered correctly before submitting'
+                            })
+            
+                        }
+                    })
+                } else {
+                    this.setState({
+                        alert: 'Please ensure all inputs are entered correctly before submitting'
+                    })
+                }
             } else {
                 this.setState({
-                    alert: 'Please ensure all inputs are entered correctly before submitting'
+                    alert: 'Please ensure you are logged in'
                 })
             }
-        } else {
+        }
+        else {
             //Handle no photo here
             this.setState({
                 alert: 'Please ensure all inputs are entered correctly before submitting'
@@ -85,10 +95,10 @@ class AddPlace extends React.Component {
         })
     }
     render() {
-        const {name, telephone, address, bedrooms, photo, alert, successfulSubmit, propertytype} = this.state;
+        const {advert, name, telephone, address, bedrooms, photo, alert, successfulSubmit, propertytype} = this.state;
         return (
-            <div style={{height: '100vh'}} className="padding">
-                <div style={{display: 'flex', background: 'rgba(255, 255, 255, 0.05)', flexDirection: 'column', width: '100%', height: '850px', alignItems: 'center', justifyContent: 'center'}} className="addPlace">
+            <div className="padding">
+                <div style={{display: 'flex', background: 'rgba(255, 255, 255, 0.05)', flexDirection: 'column', width: '100%', marginTop: '75px', paddingBottom: '75px', height: 'auto', alignItems: 'center', justifyContent: 'center'}} className="addPlace">
                     <h2>Add Your Own Place</h2>
                     <TextField 
                     label={'Landlord name'} 
@@ -106,6 +116,12 @@ class AddPlace extends React.Component {
                     label={'Property address'} 
                     name={'address'}
                     value={address}
+                    handleChange={this.handleChange}
+                    />
+                    <TextField 
+                    label={'Advert Link'} 
+                    name={'advert'}
+                    value={advert}
                     handleChange={this.handleChange}
                     />
                     <Dropdown 

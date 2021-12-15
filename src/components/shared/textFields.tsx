@@ -26,7 +26,7 @@ class TextField extends React.Component<MyProps> {
     render() {
         const {label, name, handleChange, value} = this.props;
         const {clicked, invalid} = this.state;
-        console.log(invalid)
+        console.log(value)
         return (
             <div className="row">
                 <label>

@@ -1,0 +1,52 @@
+.light-btn {
+  background: black;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  border: none;
+  transition: all 0.25s ease-out;
+}
+
+.move-light {
+  transform: translateX(50px);
+  background-color: #FFF;
+}
+.div-light {
+    width: 100px;
+    height: 40px;
+    display: flex; align-items: center;
+    border-radius: 50px;
+    transition: all 0.25s ease-out;
+}
+.white-light {
+    border: 3px solid black; 
+    background: white;
+}
+.black-light {
+    background: black;
+    border: 3px solid white;
+}
+/* 
+.label {
+  display: flex;
+  width: 180px;
+  height: 90px;
+  border: 6px solid;
+  border-radius: 99em;
+  position: relative;
+  transition: transform 0.75s ease-in-out;
+  transform-origin: 50% 50%;
+  cursor: pointer;
+}
+.label:before {
+  transition: transform 0.75s ease;
+  transition-delay: 0.5s;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  background-color: #000;
+  border-radius: 50%;
+  top: 12px;
+  left: 12px;
+} */

@@ -23,3 +23,13 @@ export const addPlace = (obj) => {
         .catch(err => rej(err))
     })
 }
+
+export const getAll = () => {
+    return new Promise((resolve, rej) => {
+        fetch('https://places-find.herokuapp.com/admin/places-all', {
+            method: 'POST',
+        })
+        .then(res => resolve(res.json()) )
+        .catch(err => rej(err))
+    })
+}

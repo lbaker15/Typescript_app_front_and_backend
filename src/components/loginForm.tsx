@@ -66,7 +66,6 @@ class Form extends React.Component<MyProps> {
     }
     render() {
         const {username, password, redirect, alert} = this.state;
-        console.log(alert)
         return (
             <React.Fragment>
                 {redirect && <Redirect to="/dashboard" />}

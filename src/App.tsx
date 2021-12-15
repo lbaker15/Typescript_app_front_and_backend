@@ -33,7 +33,7 @@ class App extends React.Component {
       <Router basename="/">
         <Switch>
           
-            <Route path="/login" children={() => (
+            <Route exact path="/" children={() => (
                   <Form />
             )} />
             
