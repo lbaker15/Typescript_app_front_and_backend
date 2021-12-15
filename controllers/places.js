@@ -73,7 +73,6 @@ const getProviders = async (req, res, next) => {
 }
 
 const getAll = async (req, res, next) => {
-    console.log('get all fired')
     Places.find({}, async (err, result) => {
         console.log(err, result)
         if (err) {

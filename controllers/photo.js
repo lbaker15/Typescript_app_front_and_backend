@@ -34,7 +34,6 @@ const uploadPhoto = (req, response, next) => {
 }
 
 const actualUpload = (id, message, username, password, originalname) => {
-
         let name = originalname;
         const myBucket = 'multertest123';
         const getImage = async() => {
