@@ -73,12 +73,13 @@ const getProviders = async (req, res, next) => {
 }
 
 const getAll = async (req, res, next) => {
+    console.log('get all fired')
     Places.find({}, async (err, result) => {
         console.log(err, result)
         if (err) {
             return new HttpError('Could not find providers', 500)
         } else {
-           return res.json({'Data': result})
+            return res.json({'Data': result})
         }
     })
 }
