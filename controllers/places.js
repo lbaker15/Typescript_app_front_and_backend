@@ -74,10 +74,11 @@ const getProviders = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
     Places.find({}, async (err, result) => {
+        console.log(err, result)
         if (err) {
-            new HttpError('Could not find providers', 500)
+            return new HttpError('Could not find providers', 500)
         } else {
-            res.json({'Data': result})
+           return res.json({'Data': result})
         }
     })
 }
