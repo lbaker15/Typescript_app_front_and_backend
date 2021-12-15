@@ -8,7 +8,7 @@ const controller3 = require('../controllers/users');
 const bucket = require('../middleware/upload');
 
 router.post('/places', controller.getProviders);
-router.post('/places-all', controller.getAll);
+router.get('/places-all', controller.getAll);
 router.post('/add-user', controller3.addUser);
 router.post('/get-user', controller3.getUser);
 router.post('/add-place', bucket.fileUpload, controller.addProvider);
