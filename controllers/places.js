@@ -72,9 +72,19 @@ const getProviders = async (req, res, next) => {
     })
 }
 
+const getAll = async (req, res, next) => {
+    Places.find({}, async (err, result) => {
+        if (err) {
+            new HttpError('Could not find providers', 500)
+        } else {
+            res.json({'Data': result})
+        }
+    })
+}
+
 const addProvider = async (req, res, next) => {
-    let { address, name, telephone, bedrooms, propertytype, photo, author } = req.body;
-    if (address && name && telephone && bedrooms && author) {
+    let { address, name, telephone, bedrooms, propertytype, photo, author, advert } = req.body;
+    if (address && name && telephone && bedrooms && author, advert) {
             let obj = {
                 name: String(name).toLowerCase(),
                 businessAddress: String(address).toLowerCase(),
@@ -82,7 +92,8 @@ const addProvider = async (req, res, next) => {
                 bedrooms: String(bedrooms).toLowerCase(),
                 photo: req.file.location,
                 propertytype: String(propertytype).toLowerCase(),
-                author: String(author)
+                author: String(author),
+                advert: String(advert)
             }
             let address2;
             try {
@@ -129,3 +140,4 @@ const addProvider = async (req, res, next) => {
 
 exports.getProviders = getProviders;
 exports.addProvider = addProvider;
+exports.getAll = getAll;

@@ -10,7 +10,8 @@ const Places = new Schema({
     propertytype: String,
     bedrooms: String,
     category: String,
-    author: String
+    author: String,
+    advert: String
 })
 
 module.exports = mongoose.model('Places', Places)
