@@ -11,7 +11,8 @@ const Places = new Schema({
     bedrooms: String,
     category: String,
     author: String,
-    advert: String
+    advert: String,
+    price: Number
 })
 
 module.exports = mongoose.model('Places', Places)
