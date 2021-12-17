@@ -37,10 +37,9 @@ const getProviders = async (req, res, next) => {
                 let data = await helpers.getDistance(obj, clientAddress)
                 let km = Number(data)/1000
                 if (km < distanceLimit) {
+                    console.log(bedrooms, propertytype, price)
                     if (bedrooms) {
-                        console.log('bedrooms')
                         if (propertytype) {
-                            console.log('property type')
                             if (price.length !== 0) {
                                 //BEDROOM & PROPERTY TYPE & PRICE DEFINED 
                                 console.log('BEDROOM & PROPERTY TYPE & PRICE DEFINED ')
