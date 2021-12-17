@@ -32,6 +32,7 @@ const getProviders = async (req, res, next) => {
         console.log('RESULT', bedrooms, propertytype)
         if (result) {       
             let promises = result.map(async (x) => {
+                console.log(x.price)
                 let obj = {'lat': x.lat, 'lng': x.lng}
                 let data = await helpers.getDistance(obj, clientAddress)
                 let km = Number(data)/1000
@@ -41,36 +42,67 @@ const getProviders = async (req, res, next) => {
                         if (propertytype) {
                             console.log('property type')
                             if (price.length !== 0) {
+                                //BEDROOM & PROPERTY TYPE & PRICE DEFINED 
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
-                                console.log(price, price1, price2)
                                 if (x.price > price1 && x.price > price2 && x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
                             } else {
-                                //BEDROOM & PROPERTY TYPE DEFINED
+                                //BEDROOM & PROPERTY TYPE & NO PRICE DEFINED
                                 if (x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
                             }
                         } else {
-                            console.log('no property type')
-                            if (x.bedrooms === bedrooms.toLowerCase()) {
-                                return array.push(x)
+                            
+                            if (price.length !== 0) {
+                                //BEDROOM & NO PROPERTY TYPE & PRICE DEFINED 
+                                let p = price.split("-")
+                                let price1 = p[0].replace("pcm", "")
+                                let price2 = p[1].replace("pcm", "")
+                                if (x.price > price1 && x.price > price2 && x.bedrooms === bedrooms.toLowerCase()) {
+                                    return array.push(x)
+                                }
+                            }  else {
+                                //BEDROOMS & NO PROPERTY TYPE & NO PRICE
+                                if (x.bedrooms === bedrooms.toLowerCase()) {
+                                    return array.push(x)
+                                }
                             }
                         }
                         
                     } else {
-                        console.log('no bedrooms')
+                        
                         if (propertytype) {
-                            console.log('property type')
-                            if (x.propertytype === propertytype.toLowerCase()) {
-                                return array.push(x)
+                            if (price.length !== 0) {
+                                //NO BEDROOM & PROPERTY TYPE & PRICE DEFINED 
+                                let p = price.split("-")
+                                let price1 = p[0].replace("pcm", "")
+                                let price2 = p[1].replace("pcm", "")
+                                if (x.price > price1 && x.price > price2 && x.propertytype === propertytype.toLowerCase()) {
+                                    return array.push(x)
+                                }
+                            }  else {
+                                //NO BEDROOMS & PROPERTY TYPE & NO PRICE
+                                if (x.propertytype === propertytype.toLowerCase()) {
+                                    return array.push(x)
+                                }
                             }
                         } else {
-                            console.log('no property type')
-                            return array.push(x)
+                            if (price.length !== 0) {
+                                //NO BEDROOM & NO PROPERTY TYPE & PRICE DEFINED 
+                                let p = price.split("-")
+                                let price1 = p[0].replace("pcm", "")
+                                let price2 = p[1].replace("pcm", "")
+                                if (x.price > price1 && x.price > price2) {
+                                    return array.push(x)
+                                }
+                            }  else {
+                                //NO BEDROOMS & NO PROPERTY TYPE & NO PRICE
+                                return array.push(x)
+                            }
                         }
                     }
                   
