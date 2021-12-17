@@ -46,7 +46,7 @@ const getProviders = async (req, res, next) => {
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
-                                if (x.price > price1 && x.price > price2 && x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
+                                if (x.price > price1 && x.price < price2 && x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
                             } else {
@@ -64,7 +64,7 @@ const getProviders = async (req, res, next) => {
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
-                                if (x.price > price1 && x.price > price2 && x.bedrooms === bedrooms.toLowerCase()) {
+                                if (x.price > price1 && x.price < price2 && x.bedrooms === bedrooms.toLowerCase()) {
                                     return array.push(x)
                                 }
                             }  else {
@@ -85,7 +85,7 @@ const getProviders = async (req, res, next) => {
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
-                                if (x.price > price1 && x.price > price2 && x.propertytype === propertytype.toLowerCase()) {
+                                if (x.price > price1 && x.price < price2 && x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
                             }  else {
@@ -102,7 +102,7 @@ const getProviders = async (req, res, next) => {
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
                                 console.log('NO BEDROOM & NO PROPERTY TYPE & PRICE DEFINED', x.price, price1, price2)
-                                if (x.price > price1 && x.price > price2) {
+                                if (x.price > price1 && x.price < price2) {
                                     return array.push(x)
                                 }
                             }  else {
