@@ -96,6 +96,7 @@ const getProviders = async (req, res, next) => {
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
+                                console.log('this condition')
                                 if (x.price > price1 && x.price > price2) {
                                     return array.push(x)
                                 }
