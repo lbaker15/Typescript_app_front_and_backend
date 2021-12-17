@@ -5,7 +5,7 @@ const Places = require('../models/places');
 const HttpError = require('../models/http-error');
 
 const getProviders = async (req, res, next) => {
-    let {address, distanceLimit, bedrooms, propertytype, price} = req.body;
+    let {address, distanceLimit, bedrooms, propertytype, price, price1, price2} = req.body;
     console.log('fired', price);
     distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
     address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
@@ -43,9 +43,9 @@ const getProviders = async (req, res, next) => {
                             if (price.length !== 0) {
                                 //BEDROOM & PROPERTY TYPE & PRICE DEFINED 
                                 console.log('BEDROOM & PROPERTY TYPE & PRICE DEFINED ')
-                                let p = price.split("-")
-                                let price1 = p[0].replace("pcm", "")
-                                let price2 = p[1].replace("pcm", "")
+                                
+                                
+                                
                                 if (x.price > price1 && x.price < price2 && x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
@@ -61,9 +61,9 @@ const getProviders = async (req, res, next) => {
                             if (price.length !== 0) {
                                 //BEDROOM & NO PROPERTY TYPE & PRICE DEFINED 
                                 console.log('/BEDROOM & NO PROPERTY TYPE & PRICE DEFINED ')
-                                let p = price.split("-")
-                                let price1 = p[0].replace("pcm", "")
-                                let price2 = p[1].replace("pcm", "")
+                                
+                                
+                                
                                 if (x.price > price1 && x.price < price2 && x.bedrooms === bedrooms.toLowerCase()) {
                                     return array.push(x)
                                 }
@@ -71,7 +71,6 @@ const getProviders = async (req, res, next) => {
                                 //BEDROOMS & NO PROPERTY TYPE & NO PRICE
                                 console.log('BEDROOMS & NO PROPERTY TYPE & NO PRICE', x.bedrooms, bedrooms)
                                 if (x.bedrooms === bedrooms.toLowerCase()) {
-                                    console.log('fired')
                                     return array.push(x)
                                 }
                             }
@@ -83,9 +82,9 @@ const getProviders = async (req, res, next) => {
                             if (price.length !== 0) {
                                 //NO BEDROOM & PROPERTY TYPE & PRICE DEFINED 
                                 console.log('NO BEDROOM & PROPERTY TYPE & PRICE DEFINED ')
-                                let p = price.split("-")
-                                let price1 = p[0].replace("pcm", "")
-                                let price2 = p[1].replace("pcm", "")
+                                
+                                
+                                
                                 if (x.price > price1 && x.price < price2 && x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
@@ -99,9 +98,9 @@ const getProviders = async (req, res, next) => {
                         } else {
                             if (price.length !== 0) {
                                 //NO BEDROOM & NO PROPERTY TYPE & PRICE DEFINED 
-                                let p = price.split("-")
-                                let price1 = p[0].replace("pcm", "")
-                                let price2 = p[1].replace("pcm", "")
+                                
+                                
+                                
                                 console.log('NO BEDROOM & NO PROPERTY TYPE & PRICE DEFINED', x.price, price1, price2)
                                 if (x.price > price1 && x.price < price2) {
                                     return array.push(x)
