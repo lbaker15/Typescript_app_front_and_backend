@@ -5,8 +5,8 @@ const Places = require('../models/places');
 const HttpError = require('../models/http-error');
 
 const getProviders = async (req, res, next) => {
-    let {address, distanceLimit, bedrooms, propertytype} = req.body;
-    console.log('fired');
+    let {address, distanceLimit, bedrooms, propertytype, price} = req.body;
+    console.log('fired', price);
     distanceLimit = (!distanceLimit) ? 1000 : distanceLimit;
     address = (!address) ? '19 Bransdale Crescent, York, YO10 3PB' : address;
     let addressEdit = await helpers.stringReplace(address);
@@ -40,8 +40,19 @@ const getProviders = async (req, res, next) => {
                         console.log('bedrooms')
                         if (propertytype) {
                             console.log('property type')
-                            if (x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
-                                return array.push(x)
+                            if (price.length !== 0) {
+                                let p = price.split("-")
+                                let price1 = p[0].replace("pcm", "")
+                                let price2 = p[1].replace("pcm", "")
+                                console.log(price, price1, price2)
+                                if (x.price > price1 && x.price > price2 && x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
+                                    return array.push(x)
+                                }
+                            } else {
+                                //BEDROOM & PROPERTY TYPE DEFINED
+                                if (x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
+                                    return array.push(x)
+                                }
                             }
                         } else {
                             console.log('no property type')
