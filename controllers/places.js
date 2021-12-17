@@ -71,6 +71,7 @@ const getProviders = async (req, res, next) => {
                                 //BEDROOMS & NO PROPERTY TYPE & NO PRICE
                                 console.log('BEDROOMS & NO PROPERTY TYPE & NO PRICE', x.bedrooms, bedrooms)
                                 if (x.bedrooms === bedrooms.toLowerCase()) {
+                                    console.log('fired')
                                     return array.push(x)
                                 }
                             }
