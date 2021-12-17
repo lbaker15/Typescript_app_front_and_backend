@@ -43,6 +43,7 @@ const getProviders = async (req, res, next) => {
                             console.log('property type')
                             if (price.length !== 0) {
                                 //BEDROOM & PROPERTY TYPE & PRICE DEFINED 
+                                console.log('BEDROOM & PROPERTY TYPE & PRICE DEFINED ')
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
@@ -51,6 +52,7 @@ const getProviders = async (req, res, next) => {
                                 }
                             } else {
                                 //BEDROOM & PROPERTY TYPE & NO PRICE DEFINED
+                                console.log('BEDROOM & PROPERTY TYPE & NO PRICE DEFINED')
                                 if (x.bedrooms === bedrooms.toLowerCase() && x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
@@ -59,6 +61,7 @@ const getProviders = async (req, res, next) => {
                             
                             if (price.length !== 0) {
                                 //BEDROOM & NO PROPERTY TYPE & PRICE DEFINED 
+                                console.log('/BEDROOM & NO PROPERTY TYPE & PRICE DEFINED ')
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
@@ -67,6 +70,7 @@ const getProviders = async (req, res, next) => {
                                 }
                             }  else {
                                 //BEDROOMS & NO PROPERTY TYPE & NO PRICE
+                                console.log('BEDROOMS & NO PROPERTY TYPE & NO PRICE')
                                 if (x.bedrooms === bedrooms.toLowerCase()) {
                                     return array.push(x)
                                 }
@@ -78,6 +82,7 @@ const getProviders = async (req, res, next) => {
                         if (propertytype) {
                             if (price.length !== 0) {
                                 //NO BEDROOM & PROPERTY TYPE & PRICE DEFINED 
+                                console.log('NO BEDROOM & PROPERTY TYPE & PRICE DEFINED ')
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
@@ -86,6 +91,7 @@ const getProviders = async (req, res, next) => {
                                 }
                             }  else {
                                 //NO BEDROOMS & PROPERTY TYPE & NO PRICE
+                                console.log('NO BEDROOMS & PROPERTY TYPE & NO PRICE')
                                 if (x.propertytype === propertytype.toLowerCase()) {
                                     return array.push(x)
                                 }
@@ -96,12 +102,13 @@ const getProviders = async (req, res, next) => {
                                 let p = price.split("-")
                                 let price1 = p[0].replace("pcm", "")
                                 let price2 = p[1].replace("pcm", "")
-                                console.log('this condition')
+                                console.log('NO BEDROOM & NO PROPERTY TYPE & PRICE DEFINED')
                                 if (x.price > price1 && x.price > price2) {
                                     return array.push(x)
                                 }
                             }  else {
                                 //NO BEDROOMS & NO PROPERTY TYPE & NO PRICE
+                                console.log('NO BEDROOMS & NO PROPERTY TYPE & NO PRICE')
                                 return array.push(x)
                             }
                         }
