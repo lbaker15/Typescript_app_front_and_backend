@@ -46,6 +46,7 @@ class Header extends React.Component<MyProps> {
                 )}
                 <div className="header">
                     {tab.map(x => {
+                        console.log(x)
                         return (
                             <button 
                             onClick={this.redirect}

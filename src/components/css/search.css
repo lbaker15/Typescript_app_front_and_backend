@@ -10,9 +10,10 @@
 }
 .search button {
     background: black; color: white;
-    font-family: Manrope; font-weight: 200;
+    font-family: Manrope; font-weight: 400;
     width: 100px;
     border: none; border-radius: 3px;
+    font-size: 14px;
 }
 .search input {
     border-radius: 3px; border: 1px solid #adadad;

@@ -148,3 +148,16 @@
     font-weight: 600;
     padding-right: 0.5rem;
 }
+
+
+.flex-col {
+    display: flex; flex-direction: column;
+    gap: 10px;
+}
+.flex-col-2 {
+    display: flex !important;
+}
+.sorting {
+    width: 100%; display: flex; justify-content: flex-end;
+    padding-top: 25px;
+}

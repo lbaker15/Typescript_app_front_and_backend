@@ -28,7 +28,7 @@ class Logout extends React.Component<MyProps> {
         return (
             <React.Fragment>
                 {redirect && (
-                    <Redirect to="/login" />
+                    <Redirect to="/" />
                 )}
                 Logout
             </React.Fragment>

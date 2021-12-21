@@ -10,7 +10,7 @@ type MyProps = {
 type MyState = {
     open: boolean;
 }
-class Buttons extends React.Component<MyProps> {
+class Buttons extends React.PureComponent<MyProps> {
     state: MyState = {
         open: false
     }

@@ -7,17 +7,19 @@ import {Redirect} from 'react-router-dom';
 import Wrapper from '../wrapper';
 import Blur from './styling/blur';
 import Alert from './alert';
+import Loader from "./loader";
 
 type MyState = {
     username: string;
     password: string;
     redirect: boolean;
     alert: string;
+    loading: boolean;
 }
 type MyProps = {}
 class Form extends React.Component<MyProps> {
     state: MyState = {
-        username: '', password: '', redirect: false, alert: ''
+        username: '', password: '', loading: false, redirect: false, alert: ''
     }
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -28,6 +30,9 @@ class Form extends React.Component<MyProps> {
         const {username, password} = this.state;
         if (username.length > 0 && password.length > 0) {
             let obj = {email: username, password}
+            this.setState({
+                loading: true
+            })
             fetch('https://places-find.herokuapp.com/admin/get-user', {
                 method: 'POST',
                 headers: {
@@ -47,12 +52,14 @@ class Form extends React.Component<MyProps> {
                     document.cookie = name + "=" + token + ";expires=" + now.toUTCString() +";path=/";
                     setTimeout(() => {
                         this.setState({
-                            redirect: true
+                            redirect: true,
+                            loading: false
                         })
                     }, 1000)
                 } else {
                     //HANDLE FAILED LOGIN HERE
                     this.setState({
+                        loading: false,
                         alert: 'Please ensure login details are correct.'
                     })
                 } 
@@ -65,7 +72,7 @@ class Form extends React.Component<MyProps> {
         })
     }
     render() {
-        const {username, password, redirect, alert} = this.state;
+        const {username, password, redirect, alert, loading} = this.state;
         return (
             <React.Fragment>
                 {redirect && <Redirect to="/dashboard" />}
@@ -78,6 +85,9 @@ class Form extends React.Component<MyProps> {
                             <Button 
                             specifiedClass="null"
                             handleClick={this.handleSubmit} stringg="Submit" />
+                            {loading && (
+                                <Loader background={false} />
+                            )}
                             {alert.length > 0 && (
                             <Alert alert={alert} successfulSubmit={false} closeAlert={this.closeAlert} />
                             )}

@@ -75,3 +75,16 @@
     font-family: Manrope;
     gap: 10px;
 }
+.padding-to {
+    padding-top: 25px; padding-bottom: 25px;
+}
+.small-col select {
+    width: 200px !important;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+.font-bold {
+    font-weight: 600;
+}

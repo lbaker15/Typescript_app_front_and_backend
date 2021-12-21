@@ -15,13 +15,17 @@ type MyProps = {
 class Dropdown extends React.Component<MyProps> {
     render() {
         const {handleChange, name, value, array} = this.props;
+        let priceDropdown = (array[0].includes('pcm')) ? true : false;
+        let nameWo = name.slice(1);
         return (
             <React.Fragment>
-                <div className="col">
-                    <label>{name}</label>
+                <div className={priceDropdown ? "small-col col": "col"}>
+                    <label
+                    className={(priceDropdown) ? 'font-bold' : ''}
+                    >{(priceDropdown) ? name[0].toLocaleUpperCase() + nameWo: name}</label>
                     <select 
                     name={name}
-                    style={{
+                    style={priceDropdown ? {} : {
                         outline: 'none',
                         padding: 10,
                         borderRadius: 10,
